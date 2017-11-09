@@ -1,7 +1,7 @@
 import { prop } from 'lodash/fp';
 
-import getEntity from '../entities/get-entity';
-import { throwServerError } from '../entities/actions/server-error';
+import getEntity from '../selectors';
+import { throwServerError } from '../actions/server-error';
 
 const checkStatus = (response) => {
   if (response.status >= 200 && response.status < 300) {

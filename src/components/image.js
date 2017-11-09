@@ -2,7 +2,7 @@ import { isUndefined } from 'lodash/fp';
 import { string, number, object } from 'prop-types';
 import React from 'react';
 import { compose, setPropTypes } from 'recompose';
-import getAbsoluteUrl from '../utils/absolute-url';
+import { getAbsoluteUrl } from '../utils';
 
 export default compose(
   setPropTypes({

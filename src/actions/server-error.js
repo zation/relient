@@ -1,4 +1,4 @@
-import { actionTypeCreator } from '../../utils/redux-actions';
+import { actionTypeCreator } from './index';
 
 const actionType = actionTypeCreator(__filename);
 

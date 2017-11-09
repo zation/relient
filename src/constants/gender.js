@@ -1,6 +1,6 @@
 import { keys } from 'lodash/fp';
 
-import getOptions from '../utils/options';
+import { getOptions } from '../utils';
 
 export const MALE = 'MALE';
 export const FEMALE = 'FEMALE';

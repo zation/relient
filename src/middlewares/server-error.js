@@ -1,4 +1,4 @@
-import { THROW_SERVER_ERROR } from '../entities/actions/server-error';
+import { THROW_SERVER_ERROR } from '../actions/server-error';
 
 export default ({ onGlobalWarning, onUnauthorized }) => ({ dispatch }) => next => (action) => {
   if (action.type === THROW_SERVER_ERROR) {
