@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "date-fns": "2.0.0-alpha.7",
+    "envvar": "^2.0.0",
     "js-cookie": "^2.2.0",
     "lodash": "^4.17.4",
     "normalizr": "^3.2.4",
@@ -23,7 +24,11 @@
     "redux-form": "^7.1.2"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
     "eslint": "^4.10.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-import-resolver-node": "^0.3.1",
@@ -60,6 +65,7 @@
     "lint": "yarn run lint-js && yarn run lint-css",
     "fix-js": "yarn run lint-js --fix",
     "fix-css": "yarn run lint-css --fix",
-    "fix": "yarn run fix-js && yarn run fix-css"
+    "fix": "yarn run fix-js && yarn run fix-css",
+    "prepublish": "babel ./src --out-dir ./"
   }
 }

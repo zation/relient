@@ -1,7 +1,7 @@
 import qs from 'qs';
 import { any, forEach, prop } from 'lodash/fp';
+import { getConfig } from './config';
 
-const { API_BASE_URL } = global.CONFIG;
 const { File } = global;
 const forEachWithKey = forEach.convert({ cap: false });
 
@@ -23,7 +23,7 @@ const commonFetch = (method, url, data, options) => {
 
   return {
     ...options,
-    url: `${API_BASE_URL}${url}`,
+    url: `${getConfig('APIDomain')}${url}`,
     isApi: true,
     method,
     headers,

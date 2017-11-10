@@ -2,7 +2,7 @@ import { isUndefined } from 'lodash/fp';
 import { string, number, object } from 'prop-types';
 import React from 'react';
 import { compose, setPropTypes } from 'recompose';
-import { getAbsoluteUrl } from '../utils';
+import { getStaticFileUrl } from '../utils';
 
 export default compose(
   setPropTypes({
@@ -35,7 +35,7 @@ export default compose(
 
   return (
     <img
-      src={getAbsoluteUrl(finalSrc)}
+      src={getStaticFileUrl(finalSrc)}
       alt={alt}
       style={{ ...extraStyle, ...style }}
       {...others}

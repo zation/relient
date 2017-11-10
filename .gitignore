@@ -1,13 +1,19 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
 # Dependencies
-node_modules/
+/node_modules/
 
 # Compiled output
-build
-
-# Test coverage
-coverage
+/actions/
+/components/
+/constants/
+/middlewares/
+/reducers/
+/utils
+/formatters.js
+/selectors.js
+/action-request.js
+/config.js
 
 # Logs
 npm-debug.log*
