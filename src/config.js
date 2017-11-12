@@ -1,9 +1,10 @@
-import EnvVar from 'envvar';
 import { propertyOf, pick } from 'lodash/fp';
 
+const { env: { DNSDomain, APIDomain } } = process;
+
 const config = {
-  DNSDomain: EnvVar.string('DNSDomain'),
-  APIDomain: EnvVar.string('APIDomain'),
+  DNSDomain,
+  APIDomain,
 };
 
 export const getConfig = propertyOf(config);

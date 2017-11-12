@@ -1302,10 +1302,6 @@ encoding@^0.1.11:
   dependencies:
     iconv-lite "~0.4.13"
 
-envvar@^2.0.0:
-  version "2.0.0"
-  resolved "http://registry.npm.taobao.org/envvar/download/envvar-2.0.0.tgz#71ec0cd0f985539a3046d4f4da56c67d7c2bf03f"
-
 error-ex@^1.2.0, error-ex@^1.3.1:
   version "1.3.1"
   resolved "http://registry.npm.taobao.org/error-ex/download/error-ex-1.3.1.tgz#f855a86ce61adc4e8621c3cda21e7a7612c3a8dc"
