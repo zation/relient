@@ -12,7 +12,7 @@ const isModifiedEvent = ({ metaKey, altKey, ctrlKey, shiftKey }) =>
 
 export default compose(
   connect(null, { push: pushAction, goBack: goBackAction }),
-  setDisplayName(__filename),
+  setDisplayName('@reboxes/link'),
   setPropTypes({
     to: string,
     children: node.isRequired,

@@ -1,6 +1,6 @@
 import qs from 'qs';
 import { any, forEach, prop } from 'lodash/fp';
-import { getConfig } from './config';
+import { getConfig } from '../config';
 
 const { File } = global;
 const forEachWithKey = forEach.convert({ cap: false });

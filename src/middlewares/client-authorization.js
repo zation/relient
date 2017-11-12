@@ -1,10 +1,11 @@
 import cookie from 'js-cookie';
+import { constant } from 'lodash/fp';
 
 export default ({
   authorizationCookieName,
   loginActionType,
   logoutActionType,
-  conditionToSetCookie,
+  conditionToSetCookie = constant(true),
 }) => () => next => (action) => {
   const { payload, type } = action;
   if (type === loginActionType) {

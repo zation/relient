@@ -1,7 +1,7 @@
 import { isUndefined } from 'lodash/fp';
 import { string, number, object } from 'prop-types';
 import React from 'react';
-import { compose, setPropTypes } from 'recompose';
+import { compose, setPropTypes, setDisplayName } from 'recompose';
 import { getStaticFileUrl } from '../utils';
 
 export default compose(
@@ -12,6 +12,7 @@ export default compose(
     height: number,
     style: object,
   }),
+  setDisplayName('@reboxes/image'),
 )(({ src, width, height, alt, style, ...others }) => {
   let finalSrc = src;
   let extraStyle = {};
