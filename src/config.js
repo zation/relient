@@ -1,10 +1,8 @@
 import { propertyOf, pick } from 'lodash/fp';
 
-const { env: { DNSDomain, APIDomain } } = process;
-
 const config = {
-  DNSDomain,
-  APIDomain,
+  DNS_DOMAIN: process.env.DNS_DOMAIN,
+  API_Domain: process.env.API_Domain,
 };
 
 export const getConfig = propertyOf(config);
