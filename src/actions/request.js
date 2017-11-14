@@ -23,7 +23,7 @@ const commonFetch = (method, url, data, options) => {
 
   return {
     ...options,
-    url: `${getConfig('APIDomain')}${url}`,
+    url: `${getConfig('API_DOMAIN')}${url}`,
     isApi: true,
     method,
     headers,

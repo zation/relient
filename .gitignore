@@ -12,7 +12,6 @@
 /utils
 /formatters.js
 /selectors.js
-/action-request.js
 /config.js
 
 # Logs

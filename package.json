@@ -1,6 +1,6 @@
 {
   "name": "reboxes",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "engines": {
     "node": ">=8.9",
     "npm": ">=5.5"
@@ -66,6 +66,6 @@
     "fix-js": "yarn run lint-js --fix",
     "fix-css": "yarn run lint-css --fix",
     "fix": "yarn run fix-js && yarn run fix-css",
-    "prepublish": "babel ./src --out-dir ./"
+    "prepublish": "rm -rf actions components constants middlewares reducers utils config.js formatters.js selector.js && babel ./src --out-dir ./"
   }
 }
