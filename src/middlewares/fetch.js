@@ -1,6 +1,6 @@
 import { prop } from 'lodash/fp';
 
-import getEntity from '../selectors';
+import { getEntity } from '../selectors';
 import { throwServerError } from '../actions/server-error';
 
 const deserialize = (response) => {
@@ -14,33 +14,34 @@ const deserialize = (response) => {
   return response.text();
 };
 
-export default fetch => ({ getState, dispatch }) => next => async (action) => {
-  const { payload, meta } = action;
-  if (payload) {
-    const { url, isApi, withoutAuth, ...options } = payload;
-    if (isApi) {
-      const authorization = getEntity('auth.authorization')(getState());
-      const response = await fetch(url, {
-        ...options,
-        headers: {
-          ...options.headers,
-          ...(!withoutAuth && authorization ? { 'x-auth-token': authorization } : {}),
-        },
-      });
-      const data = await deserialize(response);
-      if (response.status >= 200 && response.status < 300) {
-        dispatch({ ...action, payload: data });
-        return data;
-      }
+export default ({ fetch, authorizationPath }) =>
+  ({ getState, dispatch }) => next => async (action) => {
+    const { payload, meta } = action;
+    if (payload) {
+      const { url, isApi, withoutAuth, ...options } = payload;
+      if (isApi) {
+        const authorization = getEntity(authorizationPath)(getState());
+        const response = await fetch(url, {
+          ...options,
+          headers: {
+            ...options.headers,
+            ...(!withoutAuth && authorization ? { 'x-auth-token': authorization } : {}),
+          },
+        });
+        const data = await deserialize(response);
+        if (response.status >= 200 && response.status < 300) {
+          dispatch({ ...action, payload: data });
+          return data;
+        }
 
-      dispatch(throwServerError(data, {
-        status: response.status,
-        statusText: response.statusText,
-        ignoreGlobalWarning: prop('ignoreGlobalWarning')(meta),
-        ignoreAuthRedirection: prop('ignoreAuthRedirection')(meta),
-      }));
-      throw data;
+        dispatch(throwServerError(data, {
+          status: response.status,
+          statusText: response.statusText,
+          ignoreGlobalWarning: prop('ignoreGlobalWarning')(meta),
+          ignoreAuthRedirection: prop('ignoreAuthRedirection')(meta),
+        }));
+        throw data;
+      }
     }
-  }
-  return next(action);
-};
+    return next(action);
+  };
