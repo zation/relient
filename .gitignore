@@ -4,15 +4,7 @@
 /node_modules/
 
 # Compiled output
-/actions/
-/components/
-/constants/
-/middlewares/
-/reducers/
-/utils
-/formatters.js
-/selectors.js
-/config.js
+/dist/
 
 # Logs
 npm-debug.log*

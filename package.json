@@ -1,12 +1,12 @@
 {
   "name": "reboxes",
-  "version": "0.0.10",
+  "version": "0.0.12",
   "engines": {
     "node": ">=8.9",
     "npm": ">=5.5"
   },
   "peerDependencies": {
-    "react": "^16.0.0"
+    "react": ">=16.1.1"
   },
   "dependencies": {
     "date-fns": "2.0.0-alpha.7",
@@ -24,8 +24,8 @@
     "serialize-javascript": "^1.4.0"
   },
   "devDependencies": {
-    "@babel/core": "7.0.0-beta.32",
     "@babel/cli": "7.0.0-beta.32",
+    "@babel/core": "7.0.0-beta.32",
     "@babel/preset-env": "7.0.0-beta.32",
     "@babel/preset-react": "7.0.0-beta.32",
     "@babel/preset-stage-2": "7.0.0-beta.32",
@@ -67,6 +67,7 @@
     "fix-js": "yarn run lint-js --fix",
     "fix-css": "yarn run lint-css --fix",
     "fix": "yarn run fix-js && yarn run fix-css",
-    "prepublish": "rm -rf actions components constants middlewares reducers utils config.js formatters.js selector.js && babel ./src --out-dir ./"
+    "build": "rm -rf ./dist && mkdir ./dist && cp ./package.json ./dist/ && babel ./src --out-dir ./dist --source-maps inline",
+    "pub": "npm run build && npm publish ./dist"
   }
 }
