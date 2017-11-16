@@ -1,4 +1,4 @@
-import qs from 'qs';
+import { stringify } from 'query-string';
 import { any, forEach, prop } from 'lodash/fp';
 import { getConfig } from '../config';
 
@@ -32,7 +32,7 @@ const commonFetch = (method, url, data, options) => {
 };
 
 export const read = (url, query, options) =>
-  commonFetch('GET', query ? `${url}?${qs.stringify(query)}` : url, null, options);
+  commonFetch('GET', query ? `${url}?${stringify(query)}` : url, null, options);
 
 export const post = (url, data, options) =>
   commonFetch('POST', url, data, options);
@@ -46,7 +46,7 @@ export const patch = (url, data, options) =>
 export const del = (url, data, options) =>
   commonFetch(
     'DELETE',
-    data ? `${url}?${qs.stringify(data)}` : url,
+    data ? `${url}?${stringify(data)}` : url,
     null,
     options,
   );
