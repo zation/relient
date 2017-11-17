@@ -12,7 +12,7 @@ export default compose(
     height: number,
     style: object,
   }),
-  setDisplayName('@reboxes/image'),
+  setDisplayName('@relient/image'),
 )(({ src, width, height, alt, style, ...others }) => {
   let finalSrc = src;
   let extraStyle = {};

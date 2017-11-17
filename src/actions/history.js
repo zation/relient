@@ -1,6 +1,6 @@
 import { createAction, actionTypeCreator } from './index';
 
-const actionType = actionTypeCreator('@reboxes/history');
+const actionType = actionTypeCreator('@relient/history');
 
 export const INIT = actionType('INIT');
 export const PUSH = actionType('PUSH');

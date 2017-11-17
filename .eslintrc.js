@@ -13,6 +13,7 @@ module.exports = {
 
   globals: {
     __DEV__: true,
+    __BROWSER__: true,
   },
 
   env: {

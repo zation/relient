@@ -1,6 +1,6 @@
 import { actionTypeCreator } from './index';
 
-const actionType = actionTypeCreator('@reboxes/server-error');
+const actionType = actionTypeCreator('@relient/server-error');
 
 export const THROW_SERVER_ERROR = actionType('THROW_SERVER_ERROR');
 
