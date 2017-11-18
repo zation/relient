@@ -11,11 +11,6 @@ module.exports = {
 
   plugins: ['flowtype', 'css-modules'],
 
-  globals: {
-    __DEV__: true,
-    __BROWSER__: true,
-  },
-
   env: {
     browser: true,
   },
@@ -72,15 +67,5 @@ module.exports = {
     'function-paren-newline': 'off',
 
     'object-curly-newline': 'off',
-  },
-
-  settings: {
-    // Allow absolute paths in imports, e.g. import Button from 'components/Button'
-    // https://github.com/benmosher/eslint-plugin-import/tree/master/resolvers
-    'import/resolver': {
-      node: {
-        moduleDirectory: ['node_modules', 'src'],
-      },
-    },
   },
 };
