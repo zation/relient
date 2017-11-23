@@ -1,12 +1,4 @@
-import { propertyOf, pick, flow } from 'lodash/fp';
-import serialize from 'serialize-javascript';
+import { propertyOf } from 'lodash/fp';
 
-const CLIENT_CONFIGS = [
-  'DNS_DOMAIN',
-  'API_DOMAIN',
-];
-
-const config = global.relientConfig;
-
-export const getConfig = propertyOf(config);
-export const initClientConfig = `window.relientConfig=${flow(pick(CLIENT_CONFIGS), serialize)(config)}`;
+// eslint-disable-next-line
+export default propertyOf(global.__RELIENT_CONFIG__);

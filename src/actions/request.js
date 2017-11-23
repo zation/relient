@@ -1,6 +1,6 @@
 import { stringify } from 'query-string';
 import { any, forEach, prop } from 'lodash/fp';
-import { getConfig } from '../config';
+import getConfig from '../config';
 
 const { File } = global;
 const forEachWithKey = forEach.convert({ cap: false });
@@ -23,7 +23,7 @@ const commonFetch = (method, url, data, options) => {
 
   return {
     ...options,
-    url: `${getConfig('API_DOMAIN')}${url}`,
+    url: `${getConfig('apiDomain')}${url}`,
     isApi: true,
     method,
     headers,
