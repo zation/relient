@@ -14,14 +14,14 @@ const deserialize = (response) => {
   return response.text();
 };
 
-export default ({ fetch, authorizationPath }) =>
+export default ({ fetch, authorizationPath, apiDomain: globalApiDomain }) =>
   ({ getState, dispatch }) => next => async (action) => {
     const { payload, meta } = action;
     if (payload) {
-      const { url, isApi, withoutAuth, ...options } = payload;
+      const { url, isApi, withoutAuth, apiDomain, ...options } = payload;
       if (isApi) {
         const authorization = getEntity(authorizationPath)(getState());
-        const response = await fetch(url, {
+        const response = await fetch(`${apiDomain || globalApiDomain}${url}`, {
           ...options,
           headers: {
             ...options.headers,
