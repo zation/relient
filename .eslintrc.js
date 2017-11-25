@@ -14,6 +14,11 @@ module.exports = {
     browser: true,
   },
 
+  globals: {
+    __RELIENT_CONFIG__: true,
+    __BROWSER__: true,
+  },
+
   rules: {
     // Forbid the use of extraneous packages
     // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-extraneous-dependencies.md

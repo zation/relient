@@ -1,6 +1,6 @@
 {
   "name": "relient",
-  "version": "0.0.16",
+  "version": "0.0.20",
   "engines": {
     "node": ">=6.5",
     "npm": ">=3.10"
