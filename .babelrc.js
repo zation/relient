@@ -13,4 +13,7 @@ module.exports = {
     '@babel/preset-stage-2',
     '@babel/preset-react',
   ],
+  plugins: [
+    ['lodash', { id: ['lodash', 'recompose'] }],
+  ],
 };
