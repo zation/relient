@@ -1,6 +1,5 @@
-import { prop } from 'lodash/fp';
+import { prop, constant } from 'lodash/fp';
 
-import { getEntity } from '../selectors';
 import { throwServerError } from '../actions/server-error';
 
 const deserialize = (response) => {
@@ -14,18 +13,21 @@ const deserialize = (response) => {
   return response.text();
 };
 
-export default ({ fetch, authorizationPath, apiDomain: globalApiDomain }) =>
+export default ({
+  fetch,
+  apiDomain: globalApiDomain,
+  getDefaultHeader = constant({}),
+}) =>
   ({ getState, dispatch }) => next => async (action) => {
     const { payload, meta } = action;
     if (payload) {
       const { url, isApi, withoutAuth, apiDomain, ...options } = payload;
       if (isApi) {
-        const authorization = getEntity(authorizationPath)(getState());
         const response = await fetch(`${apiDomain || globalApiDomain}${url}`, {
           ...options,
           headers: {
+            ...getDefaultHeader({ getState, withoutAuth }),
             ...options.headers,
-            ...(!withoutAuth && authorization ? { 'x-auth-token': authorization } : {}),
           },
         });
         const data = await deserialize(response);
