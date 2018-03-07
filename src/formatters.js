@@ -5,7 +5,7 @@ export const date = (formatter = 'YYYY-MM-DD') => format(formatter);
 
 export const time = (formatter = 'YYYY-MM-DD HH:mm:ss') => format(formatter);
 
-export const price = ({ currency = '£', digit = 2, defaultDisplay = '--' } = {}) => (value) => {
+export const price = ({ currency = '￥', digit = 2, defaultDisplay = '--' } = {}) => (value) => {
   if (isNumber(value)) {
     const number = parseFloat(Math.round(value * 100) / 100).toFixed(digit);
     return trim(`${currency} ${number}`);
