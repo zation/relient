@@ -1,4 +1,4 @@
-import format from 'date-fns/fp/formatWithOptions';
+import format from 'date-fns/fp/format';
 import { isNumber, trim, isNaN } from 'lodash/fp';
 
 export const date = (formatter = 'YYYY-MM-DD') => format(formatter);
