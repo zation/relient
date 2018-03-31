@@ -41,6 +41,7 @@ export default ({
           statusText: response.statusText,
           ignoreGlobalWarning: prop('ignoreGlobalWarning')(meta),
           ignoreAuthRedirection: prop('ignoreAuthRedirection')(meta),
+          originalAction: action,
         }));
         throw data;
       }
