@@ -25,6 +25,7 @@ export default ({
       if (isApi) {
         const response = await fetch(`${apiDomain || globalApiDomain}${url}`, {
           ...options,
+          credentials: 'same-origin',
           headers: {
             ...getDefaultHeader({ getState, withoutAuth }),
             ...options.headers,
@@ -32,7 +33,7 @@ export default ({
         });
         const data = await deserialize(response);
         if (response.status >= 200 && response.status < 300) {
-          dispatch({ ...action, payload: data });
+          next({ ...action, payload: data });
           return data;
         }
 
