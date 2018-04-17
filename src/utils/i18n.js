@@ -17,12 +17,12 @@ export default messages => (messageKey, values) => {
     prop(messageKey),
     parse,
     prop('elements'),
-    map(({ type, value }) => {
+    map(({ type, value, id }) => {
       if (type === MESSAGE_TEXT) {
         return value;
       }
       if (type === ARGUMENT) {
-        return values[value];
+        return values[id];
       }
       throw new Error(`Element type is not handled for: ${type}`);
     }),
