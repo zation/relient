@@ -5,10 +5,7 @@ module.exports = {
 
   extends: [
     'airbnb',
-    'plugin:css-modules/recommended',
   ],
-
-  plugins: ['css-modules'],
 
   env: {
     browser: true,
