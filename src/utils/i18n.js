@@ -1,3 +1,4 @@
+import { cloneElement, isValidElement } from 'react';
 import { parse } from 'intl-messageformat-parser';
 import { flow, map, prop, every, values as getValues, join, identity } from 'lodash/fp';
 
@@ -22,7 +23,9 @@ export default messages => (messageKey, values) => {
         return value;
       }
       if (type === ARGUMENT) {
-        return values[id];
+        const argumentValue = values[id];
+        return isValidElement(argumentValue)
+          ? cloneElement(argumentValue, { key: id }) : argumentValue;
       }
       throw new Error(`Element type is not handled for: ${type}`);
     }),
