@@ -2,11 +2,9 @@
 
 Relient provides action, middleware, reducer utils to help you handle API request and merge the payload.
 
-## API
+## action utils
 
-### action utils
-
-#### request
+### request
 
 API action creator. Query will be processed by [query-string](https://github.com/sindresorhus/query-string).
 Belows are request methods:
@@ -24,9 +22,9 @@ Belows are parameters:
 * `data: Object`: request data for POST, PUT, PATCH.
 * `options: Object`: options for fetch
 
-### actions
+## actions
 
-#### serverError
+### serverError
 
 Server error action, including constant `THROW_SERVER_ERROR` and action `throwServerError`, which has below attributes:
 
@@ -35,20 +33,20 @@ Server error action, including constant `THROW_SERVER_ERROR` and action `throwSe
 * meta: the request data or the result of your custom meta creator
 * error: `true`
 
-#### history
+### history
 
 Client history related actions, including constants: `INIT`, `PUSH`, `REPLACE`, `GO`, `GO_BACK`, `GO_FORWARD` and
 actions: `init`, `push`, `replace`, `go`, `goBack`, `goForward`
 
-### reducer utils
+## reducer utils
 
-#### createEntitiesReducer(entityReducers: [reducer])
+### createEntitiesReducer(entityReducers: [reducer])
 
 **Entity** is an API domain. We will put all API related data into the `entities` node of redux store.
 And you can use the `getEntity` and `getEntityArray` from `selector` to read them when `connect`.
 You should use `createEntitiesReducer` when create redux reducer.
 
-#### merge
+### merge
 
 ```js
 ({
@@ -71,7 +69,7 @@ You should use `merge` in each API reducer for creation and query API.
 * processValue: `({ meta, originalData, payload, value })` => Object. Process each value after normalize and before merge.
 * postProcess: `({ data, originalData, meta, payload })` =>  Object. Process data after merge.
 
-#### normalize
+### normalize
 
 ```js
 schema => data => normalizedData
@@ -79,7 +77,7 @@ schema => data => normalizedData
 
 The curried version of normalizr.
 
-#### remove
+### remove
 
 ```js
 schema => (originalData, { meta }) => removedData
@@ -95,19 +93,19 @@ schema => (originalData, { payload }) => replacedData
 
 Replace entity data.
 
-### reducers
+## reducers
 
-#### history
+### history
 
 Client history related reducer
 
-#### serverError
+### serverError
 
 Server error related reducer
 
-### middleware
+## middlewares
 
-#### fetch
+### fetch
 
 ```js
 ({
