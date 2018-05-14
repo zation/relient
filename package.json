@@ -1,6 +1,6 @@
 {
   "name": "relient",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "engines": {
     "node": ">=6.5",
     "npm": ">=3.10"
@@ -55,7 +55,7 @@
     "precommit": "lint-staged",
     "lint": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" .",
     "fix": "yarn run lint --fix",
-    "build": "rm -rf ./dist && mkdir ./dist && cp ./package.json ./dist/ && babel ./src --out-dir ./dist --source-maps inline",
+    "build": "rm -rf ./dist && mkdir ./dist && cp ./package.json ./README.md ./dist/ && babel ./src --out-dir ./dist --source-maps inline",
     "pub": "npm run build && npm publish ./dist"
   }
 }
