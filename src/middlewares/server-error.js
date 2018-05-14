@@ -10,7 +10,7 @@ export default ({ onGlobalWarning, onUnauthorized } = {}) =>
       if (!ignoreGlobalWarning && onGlobalWarning) {
         onGlobalWarning({ payload, dispatch, getState });
       }
-      if (status === 401 && !ignoreAuthRedirection && onUnauthorized) {
+      if ((status === 401 || status === 403) && !ignoreAuthRedirection && onUnauthorized) {
         onUnauthorized({ payload, dispatch, getState });
       }
     }

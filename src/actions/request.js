@@ -42,10 +42,10 @@ export const put = (url, data, options) =>
 export const patch = (url, data, options) =>
   commonFetch('PATCH', url, data, options);
 
-export const del = (url, data, options) =>
+export const del = (url, query, options) =>
   commonFetch(
     'DELETE',
-    data ? `${url}?${stringify(data)}` : url,
+    query ? `${url}?${stringify(query)}` : url,
     null,
     options,
   );
