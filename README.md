@@ -1,7 +1,7 @@
 # Relient
 
-Relient is an util set working closely with [Relient-Cli](https://github.com/zation/relient-cli). It will be useful
-if your project is built on React, Redux, Redux-Form and of course Relient-Cli.
+Relient is an util set working closely with [Relient-CLI](https://github.com/zation/relient-cli). It will be useful
+if your project is built on React, Redux, Redux-Form and of course Relient-CLI.
 
 ## Install
 
@@ -135,7 +135,7 @@ export default createStore(
 
 ## Config
 
-Relint config provide consistent configration between server side and client side. You can do the configuration in a config file and change it with environment varables. It requires Relient-Cli. You need to inject the global configs in client side:
+Relient config provide consistent configuration between server side and client side. You can do the configuration in a config file and change it with environment varables. It requires Relient-CLI. You need to inject the global configs in client side:
 
 html.js
 

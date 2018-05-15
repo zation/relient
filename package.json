@@ -6,8 +6,8 @@
   "keywords": ["react", "redux", "i18n"],
   "description": "Relient is an util set working closely with Relient-Cli. It will be useful if your project is built on React, Redux, Redux-Form and of course Relient-Cli",
   "engines": {
-    "node": ">=6.5",
-    "npm": ">=3.10"
+    "node": ">=8.0",
+    "npm": ">=5.0"
   },
   "repository": {
     "type": "git",
