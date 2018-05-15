@@ -2,6 +2,11 @@
 
 Relient provides a simple **head** elements maintenance utils
 
+* [updateTag](#updateTag)
+* [updateMeta](#updateMeta)
+* [updateCustomMeta](#updateCustomMeta)
+* [updateLink](#updateLink)
+
 ### updateTag
 
 ```js

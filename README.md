@@ -9,6 +9,17 @@ if your project is built on React, Redux, Redux-Form and of course Relient-Cli.
 $ npm install relient --save
 ```
 
+## TOC
+
+* [Redux utils](#redux-utils)
+  * [Create action](#create-action)
+  * [Create reducer](#create-reducer)
+  * [Create store](#create-store)
+* [Config](#config)
+* [Formatters](#formatters)
+* [I18N](#i18n)
+* [DOM](#dom)
+
 ## Redux utils
 
 Relient provides action, middleware, reducer utils to help you handle API request and merge the payload. [Check the API document](docs/redux.md)
@@ -88,7 +99,7 @@ export default combineReducers({
 
 ```
 
-### Create store with middlewares in Relient
+### Create store
 
 ```js
 import { fetch, history, serverError } from 'relient/middleware'

@@ -2,7 +2,11 @@
 
 Relient provides common formatters to display date, time, price and percentage.
 
-### date, time
+* [data and time](#date-and-time)
+* [price](#price)
+* [percentage](#percentage)
+
+### date and time
 
 date
 

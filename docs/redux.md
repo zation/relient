@@ -2,6 +2,29 @@
 
 Relient provides action, middleware, reducer utils to help you handle API request and merge the payload.
 
+* [action utils](#action-utils)
+  * [request](#request)
+* [actions](#actions)
+  * [serverError](#serverError)
+  * [history](#history)
+* [reducer utils](#reducer-utils)
+  * [createEntitiesReducer](#createEntitiesReducer)
+  * [merge](#merge)
+  * [normalize](#normalize)
+  * [remove](#remove)
+  * [replace](#replace)
+* [reducers](#reducers)
+  * [history](#history)
+  * [serverError](#serverError)
+* [middlewares](#middlewares)
+  * [fetch](#fetch)
+  * [history](#history)
+  * [serverError](#serverError)
+* [selectors](#selectors)
+  * [getEntity](#getEntity)
+  * [getEntityArray](#getEntityArray)
+  * [isEntityEmpty](#isEntityEmpty)
+
 ## action utils
 
 ### request
