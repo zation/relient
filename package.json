@@ -1,6 +1,10 @@
 {
   "name": "relient",
-  "version": "2.0.0",
+  "version": "2.0.1",
+  "author": "Liu Yang <zation1@gmail.com>",
+  "license": "MIT",
+  "keywords": ["react", "redux", "i18n"],
+  "description": "Relient is an util set working closely with Relient-Cli. It will be useful if your project is built on React, Redux, Redux-Form and of course Relient-Cli",
   "engines": {
     "node": ">=6.5",
     "npm": ">=3.10"
