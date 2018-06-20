@@ -12,6 +12,7 @@ module.exports = {
   },
 
   globals: {
+    __RELIENT_CONFIG__: true,
     __BROWSER__: true,
   },
 
