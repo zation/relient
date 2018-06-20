@@ -15,7 +15,6 @@ $ npm install relient --save
   * [Create action](#create-action)
   * [Create reducer](#create-reducer)
   * [Create store](#create-store)
-* [Config](#config)
 * [Formatters](#formatters)
 * [I18N](#i18n)
 * [DOM](#dom)
@@ -131,41 +130,6 @@ export default createStore(
   }),
 );
 
-```
-
-## Config
-
-Relient config provide consistent configuration between server side and client side. You can do the configuration in a config file and change it with environment varables. It requires Relient-CLI. You need to inject the global configs in client side:
-
-html.js
-
-```js
-import React from 'react';
-import clientConfig from 'relient/config/client-config';
-
-export default () => (
-  <html className="no-js" lang="en">
-    <head>
-    	...
-    </head>
-    <body>
-      <script dangerouslySetInnerHTML={{ __html: clientConfig }} />
-      ...
-    </body>
-  </html>
-)
-```
-
-Then you can use `getConfig` in your code:
-
-header.js
-
-```js
-import getConfig from 'relient/config';
-
-export default () => (
-  <div>{getConfig('slogon')}</div>
-)
 ```
 
 ## Formatters
