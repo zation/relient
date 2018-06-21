@@ -1,6 +1,10 @@
 import serialize from 'serialize-javascript';
-import { pick, flow } from 'lodash/fp';
+import { flow, isArray, zipObject, map } from 'lodash/fp';
+import config from 'config';
 
-const { __RELIENT_CONFIG__ } = global;
-
-export default `window.__RELIENT_CONFIG__ = ${flow(pick(__RELIENT_CONFIG__.clientConfigs), serialize)(__RELIENT_CONFIG__)}`;
+export default (attributes) => {
+  if (!isArray(attributes) || attributes.length < 1) {
+    throw new Error('Attributes should not be empty');
+  }
+  return `window.__RELIENT_CONFIG__ = ${flow(map(config.get.bind(config)), zipObject(attributes), serialize)(attributes)}`;
+};

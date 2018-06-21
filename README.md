@@ -135,13 +135,15 @@ export default createStore(
 
 ## Config
 
-Relient config provide consistent configuration between server side and client side. You can do the configuration in a config file and change it with environment varables. It requires Relient-CLI. You need to inject the global configs in client side:
+Relient config provide consistent configuration between server side and client side based on [node-config](https://github.com/lorenwest/node-config).
+
+You need to inject the global configs in client side:
 
 html.js
 
 ```js
 import React from 'react';
-import clientConfig from 'relient/config/client-config';
+import getClientConfig from 'relient/config/client-config';
 
 export default () => (
   <html className="no-js" lang="en">
@@ -149,7 +151,7 @@ export default () => (
     	...
     </head>
     <body>
-      <script dangerouslySetInnerHTML={{ __html: clientConfig }} />
+      <script dangerouslySetInnerHTML={{ __html: getClientConfig(['slogan']) }} />
       ...
     </body>
   </html>
@@ -164,7 +166,7 @@ header.js
 import getConfig from 'relient/config';
 
 export default () => (
-  <div>{getConfig('slogon')}</div>
+  <div>{getConfig('slogan')}</div>
 )
 ```
 
