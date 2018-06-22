@@ -1,9 +1,9 @@
 import format from 'date-fns/fp/format';
 import { isFinite, trim, isNaN } from 'lodash/fp';
 
-export const date = (formatter = 'YYYY-MM-DD') => format(formatter);
+export const date = (formatter = 'YYYY-MM-dd') => format(formatter);
 
-export const time = (formatter = 'YYYY-MM-DD HH:mm:ss') => format(formatter);
+export const time = (formatter = 'YYYY-MM-dd HH:mm:ss') => format(formatter);
 
 export const price = ({ currency = '￥', digit = 2, defaultDisplay = '--' } = {}) => (value) => {
   if (isFinite(value)) {
