@@ -3,17 +3,21 @@
 module.exports = {
   presets: [
     [
-      '@babel/preset-env',
+      "@babel/preset-env",
       {
         targets: {
-          node: 'current',
-        },
-      },
+          node: "current"
+        }
+      }
     ],
-    '@babel/preset-stage-2',
-    '@babel/preset-react',
+    "@babel/react"
   ],
   plugins: [
-    ['lodash', { id: ['lodash', 'recompose'] }],
-  ],
+    ["lodash", { id: ["lodash", "recompose"] }],
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    "@babel/plugin-proposal-function-sent",
+    "@babel/plugin-proposal-export-namespace-from",
+    "@babel/plugin-proposal-numeric-separator",
+    "@babel/plugin-proposal-throw-expressions"
+  ]
 };

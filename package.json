@@ -1,6 +1,6 @@
 {
   "name": "relient",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "author": "Liu Yang <zation1@gmail.com>",
   "license": "MIT",
   "keywords": [
@@ -36,9 +36,13 @@
   "devDependencies": {
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-decorators": "^7.0.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
+    "@babel/plugin-proposal-function-sent": "^7.0.0",
+    "@babel/plugin-proposal-numeric-separator": "^7.0.0",
+    "@babel/plugin-proposal-throw-expressions": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
-    "@babel/preset-stage-2": "^7.0.0",
     "babel-eslint": "^9.0.0",
     "babel-plugin-lodash": "^3.3.4",
     "eslint": "^5.5.0",
