@@ -10,7 +10,7 @@ const commonFetch = (method, url, data, options) => {
     'content-type': 'application/json',
     ...prop('headers')(options),
   };
-  if (any(item => item instanceof File)(data)) {
+  if (File && any(item => item instanceof File)(data)) {
     finalData = new FormData();
     forEachWithKey((value, key) => {
       finalData.append(key, value);
