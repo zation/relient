@@ -1,9 +1,23 @@
 import format from 'date-fns/fp/format';
-import { isFinite, trim, isNaN } from 'lodash/fp';
+import parseISO from 'date-fns/fp/parseISO';
+import parse from 'date-fns/fp/parse';
+import { isFinite, trim, isNaN, flow } from 'lodash/fp';
 
-export const date = (formatter = 'YYYY-MM-dd') => format(formatter);
+export const date = ({
+  formatter = 'yyyy-MM-dd',
+  parser,
+} = {}) => flow(
+  parser ? parse(parser) : parseISO,
+  format(formatter),
+);
 
-export const time = (formatter = 'YYYY-MM-dd HH:mm:ss') => format(formatter);
+export const time = ({
+  formatter = 'yyyy-MM-dd HH:mm:ss',
+  parser,
+}) => flow(
+  parser ? parse(parser) : parseISO,
+  format(formatter),
+);
 
 export const price = ({ currency = '￥', digit = 2, defaultDisplay = '--' } = {}) => (value) => {
   if (isFinite(value)) {

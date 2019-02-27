@@ -1,6 +1,6 @@
 {
   "name": "relient",
-  "version": "2.3.3",
+  "version": "3.0.1",
   "author": "Liu Yang <zation1@gmail.com>",
   "license": "MIT",
   "keywords": [
@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "config": ">=1.31.0",
-    "date-fns": ">=2.0.0-alpha.7",
+    "date-fns": ">=2.0.0-alpha.27",
     "intl-messageformat-parser": ">=1.4.0",
     "lodash": ">=4.17.10",
     "normalizr": ">=3.2.4",
