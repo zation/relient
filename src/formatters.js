@@ -14,7 +14,7 @@ export const date = ({
 export const time = ({
   formatter = 'yyyy-MM-dd HH:mm:ss',
   parser,
-}) => flow(
+} = {}) => flow(
   parser ? parse(parser) : parseISO,
   format(formatter),
 );
