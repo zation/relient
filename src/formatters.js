@@ -1,23 +1,42 @@
 import format from 'date-fns/fp/format';
 import parseISO from 'date-fns/fp/parseISO';
 import parse from 'date-fns/fp/parse';
-import { isFinite, trim, isNaN, flow } from 'lodash/fp';
+import isValid from 'date-fns/fp/isValid';
+import { isFinite, trim, isNaN } from 'lodash/fp';
 
 export const date = ({
   formatter = 'yyyy-MM-dd',
   parser,
-} = {}) => flow(
-  parser ? parse(parser) : parseISO,
-  format(formatter),
-);
+  baseDate,
+  defaultDisplay = '--',
+} = {}) => (value) => {
+  try {
+    const dateValue = (parser && baseDate ? parse(baseDate)(parser) : parseISO)(value);
+    if (isValid(dateValue)) {
+      return format(formatter)(dateValue);
+    }
+    return defaultDisplay;
+  } catch (e) {
+    return defaultDisplay;
+  }
+};
 
 export const time = ({
   formatter = 'yyyy-MM-dd HH:mm:ss',
   parser,
-} = {}) => flow(
-  parser ? parse(parser) : parseISO,
-  format(formatter),
-);
+  baseDate,
+  defaultDisplay = '--',
+} = {}) => (value) => {
+  try {
+    const dateValue = (parser && baseDate ? parse(baseDate)(parser) : parseISO)(value);
+    if (isValid(dateValue)) {
+      return format(formatter)(dateValue);
+    }
+    return defaultDisplay;
+  } catch (e) {
+    return defaultDisplay;
+  }
+};
 
 export const price = ({ currency = '￥', digit = 2, defaultDisplay = '--' } = {}) => (value) => {
   if (isFinite(value)) {
