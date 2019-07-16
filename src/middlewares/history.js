@@ -4,7 +4,8 @@ export default history => () => next => (action) => {
   const { payload, type } = action;
 
   if (type === PUSH) {
-    history.push(payload);
+    const [pathname, hash] = payload.split('#');
+    history.push({ pathname, hash });
     return next({ ...action, payload: history.location });
   }
   if (type === REPLACE) {
