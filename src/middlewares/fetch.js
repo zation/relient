@@ -17,35 +17,37 @@ export default ({
   fetch,
   apiDomain: globalApiDomain,
   getDefaultHeader = constant({}),
-}) =>
-  ({ getState, dispatch }) => next => async (action) => {
-    const { payload, meta } = action;
-    if (payload) {
-      const { url, isApi, withoutAuth, apiDomain, ...options } = payload;
-      if (isApi) {
-        const response = await fetch(`${apiDomain || globalApiDomain}${url}`, {
-          ...options,
-          credentials: 'same-origin',
-          headers: {
-            ...getDefaultHeader({ getState, withoutAuth }),
-            ...options.headers,
-          },
-        });
-        const data = await deserialize(response);
-        if (response.status >= 200 && response.status < 300) {
-          next({ ...action, payload: data });
-          return data;
-        }
-
-        dispatch(throwServerError(data, {
-          status: response.status,
-          statusText: response.statusText,
-          ignoreGlobalWarning: prop('ignoreGlobalWarning')(meta),
-          ignoreAuthRedirection: prop('ignoreAuthRedirection')(meta),
-          originalAction: action,
-        }));
-        throw data;
+}) => ({
+  getState,
+  dispatch,
+}) => (next) => async (action) => {
+  const { payload, meta } = action;
+  if (payload) {
+    const { url, isApi, withoutAuth, apiDomain, ...options } = payload;
+    if (isApi) {
+      const response = await fetch(`${apiDomain || globalApiDomain}${url}`, {
+        ...options,
+        credentials: 'same-origin',
+        headers: {
+          ...getDefaultHeader({ getState, withoutAuth }),
+          ...options.headers,
+        },
+      });
+      const data = await deserialize(response);
+      if (response.status >= 200 && response.status < 300) {
+        next({ ...action, payload: data });
+        return data;
       }
+
+      dispatch(throwServerError(data, {
+        status: response.status,
+        statusText: response.statusText,
+        ignoreGlobalWarning: prop('ignoreGlobalWarning')(meta),
+        ignoreAuthRedirection: prop('ignoreAuthRedirection')(meta),
+        originalAction: action,
+      }));
+      throw data;
     }
-    return next(action);
-  };
+  }
+  return next(action);
+};

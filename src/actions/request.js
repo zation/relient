@@ -10,7 +10,7 @@ const commonFetch = (method, url, data, options) => {
     'content-type': 'application/json',
     ...prop('headers')(options),
   };
-  if (File && any(item => item instanceof File)(data)) {
+  if (File && any((item) => item instanceof File)(data)) {
     finalData = new FormData();
     forEachWithKey((value, key) => {
       finalData.append(key, value);
@@ -30,22 +30,32 @@ const commonFetch = (method, url, data, options) => {
   };
 };
 
-export const read = (url, query, options) =>
-  commonFetch('GET', query ? `${url}?${stringify(query)}` : url, null, options);
+export const read = (
+  url,
+  query,
+  options,
+) => commonFetch('GET', query ? `${url}?${stringify(query)}` : url, null, options);
 
-export const post = (url, data, options) =>
-  commonFetch('POST', url, data, options);
+export const post = (
+  url,
+  data,
+  options,
+) => commonFetch('POST', url, data, options);
 
-export const put = (url, data, options) =>
-  commonFetch('PUT', url, data, options);
+export const put = (
+  url,
+  data,
+  options,
+) => commonFetch('PUT', url, data, options);
 
-export const patch = (url, data, options) =>
-  commonFetch('PATCH', url, data, options);
+export const patch = (
+  url,
+  data,
+  options,
+) => commonFetch('PATCH', url, data, options);
 
-export const del = (url, query, options) =>
-  commonFetch(
-    'DELETE',
-    query ? `${url}?${stringify(query)}` : url,
-    null,
-    options,
-  );
+export const del = (
+  url,
+  query,
+  options,
+) => commonFetch('DELETE', query ? `${url}?${stringify(query)}` : url, null, options);

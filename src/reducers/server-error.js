@@ -1,6 +1,6 @@
 import { prop } from 'lodash/fp';
+import { handleActions } from 'redux-actions';
 
-import { handleActions } from './index';
 import { THROW_SERVER_ERROR } from '../actions/server-error';
 
 export default {

@@ -4,7 +4,7 @@ import { reduce } from 'lodash/fp';
 import serverError from './server-error';
 import history from './history';
 
-export default entityReducers => ({
+export default (entityReducers) => ({
   entities: combineReducers({
     ...serverError,
     ...history,

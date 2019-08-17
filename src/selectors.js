@@ -3,7 +3,7 @@ import { prop, curry, flow, map, isNil, isObject, isEmpty } from 'lodash/fp';
 export const getEntity = curry((keyPath, state) => prop(`entities.${keyPath}`, state));
 
 export const getEntityArray = curry(
-  (keyPath, state) => flow(prop(`entities[${keyPath}]`), map(value => value))(state),
+  (keyPath, state) => flow(prop(`entities[${keyPath}]`), map((value) => value))(state),
 );
 
 export const isEntityEmpty = curry((keyPath, state) => {

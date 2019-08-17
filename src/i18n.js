@@ -5,7 +5,7 @@ import { flow, map, prop, every, values as getValues, join, identity } from 'lod
 const MESSAGE_TEXT = 'messageTextElement';
 const ARGUMENT = 'argumentElement';
 
-export default messages => (messageKey, values) => {
+export default (messages) => (messageKey, values) => {
   if (!messages) {
     throw new Error('Messages is required');
   }
@@ -29,6 +29,6 @@ export default messages => (messageKey, values) => {
       }
       throw new Error(`Element type is not handled for: ${type}`);
     }),
-    flow(getValues, every(value => typeof value === 'string'))(values) ? join('') : identity,
+    flow(getValues, every((value) => typeof value === 'string'))(values) ? join('') : identity,
   )(messages);
 };
