@@ -11,21 +11,28 @@ export default (messages) => (messageKey, values) => {
     throw new Error('messageKey is required');
   }
 
-  return flow(
-    prop(messageKey),
-    parse,
-    map((element) => {
-      const { value, type } = element;
-      if (isLiteralElement(element)) {
-        return value;
-      }
-      if (isArgumentElement(element)) {
-        const argumentValue = values[value];
-        return isValidElement(argumentValue)
-          ? cloneElement(argumentValue, { key: value }) : argumentValue;
-      }
-      throw new Error(`Element type is not handled for: ${type}`);
-    }),
-    flow(getValues, every((value) => typeof value === 'string'))(values) ? join('') : identity,
-  )(messages);
+  try {
+    return flow(
+      prop(messageKey),
+      parse,
+      map((element) => {
+        const { value, type } = element;
+        if (isLiteralElement(element)) {
+          return value;
+        }
+        if (isArgumentElement(element)) {
+          const argumentValue = values[value];
+          return isValidElement(argumentValue)
+            ? cloneElement(argumentValue, { key: value }) : argumentValue;
+        }
+        throw new Error(`Element type is not handled for: ${type}`);
+      }),
+      flow(getValues, every((value) => typeof value === 'string'))(values) ? join('') : identity,
+    )(messages);
+  } catch (e) {
+    if (values) {
+      throw new Error(`Error for messageKey: ${messageKey} and values: ${JSON.stringify(values)}`);
+    }
+    throw new Error(`Error for messageKey: ${messageKey}`);
+  }
 };
