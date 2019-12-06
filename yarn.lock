@@ -3907,9 +3907,9 @@ semver@^6.1.2, semver@^6.3.0:
   integrity sha1-7gpkyK9ejO6mdoexM3YeG+y9HT0=
 
 serialize-javascript@>=2.1.0:
-  version "2.1.0"
-  resolved "https://registry.npm.taobao.org/serialize-javascript/download/serialize-javascript-2.1.0.tgz?cache=0&sync_timestamp=1567628249948&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fserialize-javascript%2Fdownload%2Fserialize-javascript-2.1.0.tgz#9310276819efd0eb128258bb341957f6eb2fc570"
-  integrity sha1-kxAnaBnv0OsSgli7NBlX9usvxXA=
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/serialize-javascript/-/serialize-javascript-2.1.1.tgz#952907a04a3e3a75af7f73d92d15e233862048b2"
+  integrity sha512-MPLPRpD4FNqWq9tTIjYG5LesFouDhdyH0EPY3gVK4DRD5+g4aDqdNSzLIwceulo3Yj+PL1bPh6laE5+H6LTcrQ==
 
 set-blocking@~2.0.0:
   version "2.0.0"
