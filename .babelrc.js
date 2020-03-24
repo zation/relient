@@ -13,7 +13,7 @@ module.exports = {
     '@babel/react',
   ],
   plugins: [
-    ['lodash', { id: ['lodash', 'recompose'] }],
+    ['lodash', { id: ['lodash'] }],
     ['@babel/plugin-proposal-decorators', { legacy: true }],
     '@babel/plugin-proposal-function-sent',
     '@babel/plugin-proposal-export-namespace-from',
