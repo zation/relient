@@ -1,7 +1,7 @@
 # Relient
 
 Relient is an util set working closely with [Relient-CLI](https://github.com/zation/relient-cli). It will be useful
-if your project is built on React, Redux, Redux-Form and of course Relient-CLI.
+if your project is built on React, Redux and of course Relient-CLI.
 
 ## Install
 
@@ -86,7 +86,6 @@ reducers/index.js
 
 ```js
 import { createEntitiesReducer, history, serverError } from 'relient/reducers';
-import { reducer as formReducer } from 'redux-form';
 import { combineReducers } from 'redux';
 import { account } from './account'
 
@@ -94,7 +93,6 @@ export default combineReducers({
   ...createEntitiesReducer([ account ]),
   history,
   serverError,
-  form: formReducer,
 });
 
 ```
