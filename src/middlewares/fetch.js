@@ -23,7 +23,9 @@ export default ({
 }) => (next) => async (action) => {
   const { payload, meta } = action;
   if (payload) {
-    const { url, isApi, withoutAuth, apiDomain, ...options } = payload;
+    const {
+      url, isApi, withoutAuth, apiDomain, ...options
+    } = payload;
     if (isApi) {
       const response = await fetch(`${apiDomain || globalApiDomain}${url}`, {
         ...options,

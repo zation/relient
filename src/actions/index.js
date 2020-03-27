@@ -10,4 +10,6 @@ export const createAction = (
   metaCreator,
 ) => originalCreateAction(type, payloadCreator, metaCreator || ((data) => data));
 
-export { read, post, del, patch, put } from './request';
+export {
+  read, post, del, patch, put,
+} from './request';

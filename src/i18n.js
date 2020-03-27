@@ -1,6 +1,8 @@
 import { cloneElement, isValidElement } from 'react';
 import { parse, isLiteralElement, isArgumentElement } from 'intl-messageformat-parser';
-import { flow, map, prop, every, values as getValues, join, identity } from 'lodash/fp';
+import {
+  flow, map, prop, every, values as getValues, join, identity,
+} from 'lodash/fp';
 
 const mapWithIndex = map.convert({ cap: false });
 

@@ -1,4 +1,6 @@
-import { PUSH, REPLACE, GO, GO_FORWARD, GO_BACK } from '../actions/history';
+import {
+  PUSH, REPLACE, GO, GO_FORWARD, GO_BACK,
+} from '../actions/history';
 
 export default (history) => () => (next) => (action) => {
   const { payload, type } = action;

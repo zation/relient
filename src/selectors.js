@@ -1,4 +1,6 @@
-import { prop, curry, flow, map, isNil, isObject, isEmpty } from 'lodash/fp';
+import {
+  prop, curry, flow, map, isNil, isObject, isEmpty,
+} from 'lodash/fp';
 
 export const getEntity = curry((keyPath, state) => prop(`entities.${keyPath}`, state));
 

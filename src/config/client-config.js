@@ -1,5 +1,7 @@
 import serialize from 'serialize-javascript';
-import { flow, isArray, zipObject, map } from 'lodash/fp';
+import {
+  flow, isArray, zipObject, map,
+} from 'lodash/fp';
 import config from 'config';
 
 export default (attributes) => {
