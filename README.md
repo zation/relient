@@ -82,7 +82,7 @@ export default {
 
 ```
 
-reducers/index.js
+reducers/index.ts
 
 ```js
 import { createEntitiesReducer, history, serverError } from 'relient/reducers';

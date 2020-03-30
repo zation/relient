@@ -1,8 +1,11 @@
 import { prop, constant } from 'lodash/fp';
+// TODO: remove below when ts 3.8 is supported by typescript-eslint: https://github.com/typescript-eslint/typescript-eslint/issues/1436
+// eslint-disable-next-line import/no-unresolved
+import type { RequestInfo, RequestInit, Response } from 'node-fetch';
 
 import { throwServerError } from '../actions/server-error';
 
-const deserialize = (response) => {
+const deserialize = (response: Response): Promise<any> => {
   const header = response.headers.get('Content-Type') || '';
   if (header.indexOf('application/json') > -1) {
     return response.json();
@@ -14,9 +17,16 @@ const deserialize = (response) => {
 };
 
 export default ({
-  fetch,
+  fetch: a,
   apiDomain: globalApiDomain,
   getDefaultHeader = constant({}),
+}: {
+  fetch: (
+    url: RequestInfo,
+    init?: RequestInit,
+  ) => Promise<Response>,
+  apiDomain: string,
+  getDefaultHeader: (object) => object
 }) => ({
   getState,
   dispatch,
@@ -27,7 +37,7 @@ export default ({
       url, isApi, withoutAuth, apiDomain, ...options
     } = payload;
     if (isApi) {
-      const response = await fetch(`${apiDomain || globalApiDomain}${url}`, {
+      const response = await a(`${apiDomain || globalApiDomain}${url}`, {
         ...options,
         credentials: 'same-origin',
         headers: {

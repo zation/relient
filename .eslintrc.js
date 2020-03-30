@@ -1,11 +1,19 @@
 // ESLint configuration
 // http://eslint.org/docs/user-guide/configuring
 module.exports = {
-  parser: 'babel-eslint',
+  parser: '@typescript-eslint/parser',
+
+  plugins: [
+    '@typescript-eslint',
+  ],
 
   extends: [
-    'airbnb',
+    'airbnb-typescript/base',
   ],
+
+  parserOptions: {
+    project: './tsconfig.json',
+  },
 
   env: {
     browser: true,
@@ -14,5 +22,10 @@ module.exports = {
   globals: {
     __RELIENT_CONFIG__: true,
     __BROWSER__: true,
+  },
+
+  rules: {
+    'function-paren-newline': 'off',
+    '@typescript-eslint/indent': 'off',
   },
 };

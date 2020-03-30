@@ -2,6 +2,7 @@
 // https://babeljs.io/docs/usage/api/
 module.exports = {
   presets: [
+    '@babel/preset-typescript',
     [
       '@babel/preset-env',
       {
@@ -10,7 +11,6 @@ module.exports = {
         },
       },
     ],
-    '@babel/react',
   ],
   plugins: [
     ['lodash', { id: ['lodash'] }],

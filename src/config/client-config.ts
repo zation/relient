@@ -4,7 +4,7 @@ import {
 } from 'lodash/fp';
 import config from 'config';
 
-export default (attributes) => {
+export default (attributes: string[]): string => {
   if (!isArray(attributes) || attributes.length < 1) {
     throw new Error('Attributes should not be empty');
   }

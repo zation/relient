@@ -1,12 +1,24 @@
-import { cloneElement, isValidElement } from 'react';
-import { parse, isLiteralElement, isArgumentElement } from 'intl-messageformat-parser';
+import { cloneElement, isValidElement, ReactElement } from 'react';
+import {
+  parse,
+  isLiteralElement,
+  isArgumentElement,
+} from 'intl-messageformat-parser';
 import {
   flow, map, prop, every, values as getValues, join, identity,
 } from 'lodash/fp';
+import convert from 'lodash/fp/convert';
 
-const mapWithIndex = map.convert({ cap: false });
+const mapWithIndex = convert(map, { cap: false });
 
-export default (messages) => (messageKey, values) => {
+export default (messages: {
+  [key: string]: string
+}) => (
+  messageKey: string,
+  values?: {
+    [key: string]: ReactElement | string | number
+  },
+): string | undefined | (ReactElement | string | number)[] => {
   if (!messages) {
     throw new Error('Messages is required');
   }
@@ -25,7 +37,7 @@ export default (messages) => (messageKey, values) => {
           return value;
         }
         if (isArgumentElement(element)) {
-          const argumentValue = values[value];
+          const argumentValue = prop(value)(values);
           return isValidElement(argumentValue)
             ? cloneElement(argumentValue, { key: `${value}${index}` }) : argumentValue;
         }

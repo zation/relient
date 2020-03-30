@@ -2,7 +2,9 @@
 
 import { prop } from 'lodash/fp';
 
-export default (property) => {
+declare const __BROWSER__: boolean;
+
+export default (property: string): any => {
   if (property === null || property === undefined) {
     throw new Error('Calling getConfig with null or undefined argument');
   }

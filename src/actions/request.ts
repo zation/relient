@@ -1,10 +1,12 @@
 import { stringify } from 'query-string';
 import { any, forEach, prop } from 'lodash/fp';
+import convert from 'lodash/fp/convert';
 
+declare const global;
 const { File } = global;
-const forEachWithKey = forEach.convert({ cap: false });
+const forEachWithKey = convert(forEach, { cap: false });
 
-const commonFetch = (method, url, data, options) => {
+const commonFetch = (method: string, url: string, data?: object, options?: object): object => {
   let finalData;
   let headers = {
     'content-type': 'application/json',
@@ -31,31 +33,31 @@ const commonFetch = (method, url, data, options) => {
 };
 
 export const read = (
-  url,
-  query,
-  options,
-) => commonFetch('GET', query ? `${url}?${stringify(query)}` : url, null, options);
+  url: string,
+  query: object,
+  options: object,
+) => commonFetch('GET', query ? `${url}?${stringify(query)}` : url, undefined, options);
 
 export const post = (
-  url,
-  data,
-  options,
+  url: string,
+  data: object,
+  options: object,
 ) => commonFetch('POST', url, data, options);
 
 export const put = (
-  url,
-  data,
-  options,
+  url: string,
+  data: object,
+  options: object,
 ) => commonFetch('PUT', url, data, options);
 
 export const patch = (
-  url,
-  data,
-  options,
+  url: string,
+  data: object,
+  options: object,
 ) => commonFetch('PATCH', url, data, options);
 
 export const del = (
-  url,
-  query,
-  options,
-) => commonFetch('DELETE', query ? `${url}?${stringify(query)}` : url, null, options);
+  url: string,
+  query: object,
+  options: object,
+) => commonFetch('DELETE', query ? `${url}?${stringify(query)}` : url, undefined, options);
