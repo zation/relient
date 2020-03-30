@@ -1,6 +1,6 @@
 import {
-  handleActions,
-  combineActions,
+  handleActions as _handleActions,
+  combineActions as _combineActions,
   Reducer,
 } from 'redux-actions';
 import { combineReducers, ReducersMapObject } from 'redux';
@@ -21,6 +21,9 @@ export { default as merge } from './merge';
 export { default as normalize } from './normalize';
 export { default as replace } from './replace';
 export { default as remove } from './remove';
+
+export const handleActions = _handleActions;
+export const combineActions = _combineActions;
 
 export const history = {
   history: handleActions({

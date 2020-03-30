@@ -1,10 +1,10 @@
 import {
   flow,
   identity,
-  findKey,
-  eq,
+  propertyOf,
 } from 'lodash/fp';
 
 export default (textMap: {
   [text: string]: any
-}) => (i18n = identity) => flow((value) => findKey(eq(value))(textMap), i18n);
+  // @ts-ignore
+}) => (i18n = identity) => flow(propertyOf(textMap), i18n);
