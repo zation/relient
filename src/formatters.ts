@@ -1,26 +1,36 @@
 import format from 'date-fns/fp/format';
+import parseISO from 'date-fns/fp/parseISO';
 import isValid from 'date-fns/fp/isValid';
-import { isFinite, trim, isNaN } from 'lodash/fp';
+import {
+  isFinite,
+  trim,
+  isNaN,
+} from 'lodash/fp';
+
+const datetime = ({
+  formatter = 'yyyy-MM-dd HH:mm:ss',
+  defaultDisplay = '--',
+  parse = parseISO,
+} = {}) => (value: number | Date | string): string => {
+  try {
+    const dateValue = typeof value === 'string' ? parse(value) : value;
+    if (isValid(dateValue)) {
+      return format(formatter)(dateValue);
+    }
+    return defaultDisplay;
+  } catch (e) {
+    console.warn(e);
+    return defaultDisplay;
+  }
+};
 
 export const date = ({
   formatter = 'yyyy-MM-dd',
   defaultDisplay = '--',
-} = {}) => (value: number | Date): string => {
-  if (isValid(value)) {
-    return format(formatter)(value);
-  }
-  return defaultDisplay;
-};
+  parse = parseISO,
+} = {}) => datetime({ formatter, defaultDisplay, parse });
 
-export const time = ({
-  formatter = 'yyyy-MM-dd HH:mm:ss',
-  defaultDisplay = '--',
-} = {}) => (value: number | Date): string => {
-  if (isValid(value)) {
-    return format(formatter)(value);
-  }
-  return defaultDisplay;
-};
+export const time = datetime;
 
 export const price = ({ currency = '￥', digit = 2, defaultDisplay = '--' } = {}) => (value: number): string => {
   if (isFinite(value)) {
