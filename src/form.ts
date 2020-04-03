@@ -2,9 +2,10 @@ import { isNil } from 'lodash/fp';
 import { FieldValidator } from 'final-form';
 
 export interface Validator {
-  (message: string): FieldValidator<string> |
-  ((number: number) => FieldValidator<string>) |
-  ((name: string) => FieldValidator<string>)
+  (message: string):
+    FieldValidator<string> |
+    ((number: number) => FieldValidator<string>) |
+    ((name: string) => FieldValidator<string>)
 }
 
 export const composeValidators = (
@@ -27,7 +28,7 @@ export const sameAsValidator: Validator = (message) => (name) => (
   value,
   allValues,
 ) => (
-  (allValues && value === allValues[name]) ? undefined : message
+  (allValues && value !== allValues[name]) ? message : undefined
 );
 
 export const minLengthValidator: Validator = (message) => (length) => (value) => (
@@ -43,23 +44,23 @@ export const positiveNumberValidator: Validator = (message) => (value) => (
 );
 
 export const lessOrEqualValidator: Validator = (message) => (number) => (value) => (
-  value !== '' && Number(value) <= number ? message : undefined
+  value !== '' && Number(value) > number ? message : undefined
 );
 
 export const moreOrEqualValidator: Validator = (message) => (number) => (value) => (
-  value !== '' && Number(value) >= number ? message : undefined
+  value !== '' && Number(value) < number ? message : undefined
 );
 
 export const lessOrEqualThanValidator: Validator = (message) => (name) => (
   value,
   allValues,
 ) => (
-  value !== '' && allValues && allValues[name] !== '' && Number(value) <= Number(allValues[name]) ? message : undefined
+  value !== '' && allValues && allValues[name] !== '' && Number(value) > Number(allValues[name]) ? message : undefined
 );
 
 export const moreOrEqualThanValidator: Validator = (message) => (name) => (
   value,
   allValues,
 ) => (
-  value !== '' && allValues && allValues[name] !== '' && Number(value) >= Number(allValues[name]) ? message : undefined
+  value !== '' && allValues && allValues[name] !== '' && Number(value) < Number(allValues[name]) ? message : undefined
 );
