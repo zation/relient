@@ -1,6 +1,6 @@
 {
   "name": "relient",
-  "version": "4.2.8",
+  "version": "4.2.9",
   "author": "Liu Yang <zation1@gmail.com>",
   "license": "MIT",
   "keywords": [
@@ -22,6 +22,7 @@
     "date-fns": ">=2.11.0",
     "intl-messageformat-parser": ">=4.1.1",
     "lodash": ">=4.17.15",
+    "normalizr": ">=3.6.0",
     "query-string": ">=6.11.1",
     "react": ">=16.13.1",
     "redux": ">=4.0.5",
@@ -44,7 +45,6 @@
     "final-form": "^4.18.7",
     "husky": "^4.2.3",
     "lint-staged": "^10.0.8",
-    "normalizr": ">=3.6.0",
     "typescript": "^3.8.3"
   },
   "husky": {
@@ -57,8 +57,8 @@
   },
   "scripts": {
     "lint": "eslint --ignore-path .gitignore './**/*.ts'",
-    "fix": "yarn run lint --fix",
+    "fix": "npm run lint --fix",
     "build": "rm -rf ./dist && mkdir ./dist && cp ./package.json ./README.md ./dist/ && tsc",
-    "pub": "npm run build && npm publish ./dist --registry=https://registry.npmjs.org/"
+    "pub": "npm run lint && npm run build && npm publish ./dist --registry=https://registry.npmjs.org/"
   }
 }

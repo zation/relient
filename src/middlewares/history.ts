@@ -14,11 +14,11 @@ export default (history: History) => () => (next) => (action) => {
 
   if (type === PUSH) {
     const [pathname, hash] = payload.split('#');
-    if (startsWith(baseUrl)(pathname)) {
+    if (startsWith(baseUrl)(pathname) || startsWith(`/${baseUrl}`)(pathname) || startsWith(baseUrl)(`/${pathname}`)) {
       history.push({ pathname, hash });
     } else {
       history.push({
-        pathname: `${baseUrl}/${pathname}`.replace(/([^:]\/)\/+/g, '$1'),
+        pathname: `/${baseUrl}/${pathname}`.replace(/([^:]\/)\/+/g, '$1'),
         hash,
       });
     }
