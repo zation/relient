@@ -1,5 +1,5 @@
 import { isNil } from 'lodash/fp';
-import { FieldValidator } from 'final-form';
+import type { FieldValidator } from 'final-form';
 
 export interface Validator {
   (message: string):
