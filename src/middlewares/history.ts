@@ -5,11 +5,8 @@ import { startsWith } from 'lodash/fp';
 import {
   PUSH, REPLACE, GO, GO_FORWARD, GO_BACK,
 } from '../actions/history';
-import getConfig from '../config';
 
-const baseUrl = getConfig('baseUrl');
-
-export default (history: History) => () => (next) => (action) => {
+export default (history: History, baseUrl = '') => () => (next) => (action) => {
   const { payload, type } = action;
 
   if (type === PUSH) {
