@@ -4,7 +4,7 @@ import {
   Reducer,
 } from 'redux-actions';
 import { combineReducers, ReducersMapObject } from 'redux';
-import { reduce } from 'lodash/fp';
+import { reduce, intersection } from 'lodash/fp';
 import {
   GO,
   GO_BACK,
@@ -59,7 +59,13 @@ export const createEntitiesReducer = (
     ...history,
     ...reduce((
       result,
-      item: any,
-    ) => ({ ...result, ...item }), {})(entityReducers),
+      item: object,
+    ) => {
+      const duplicatedKeys = intersection(Object.keys(item))(Object.keys(result));
+      if (duplicatedKeys.length > 0) {
+        console.warn(`Duplicated entity reducer keys: ${duplicatedKeys.join(', ')}`);
+      }
+      return { ...result, ...item };
+    }, {})(entityReducers),
   }),
 });
