@@ -2,7 +2,7 @@ import {
   isArray, mapValues, prop, flow, identity,
 } from 'lodash/fp';
 import type { schema as normalizrSchema } from 'normalizr';
-import type { ReducerMapValue } from 'redux-actions';
+import type { ReducerMeta } from 'redux-actions';
 import normalize from './normalize';
 
 // @ts-ignore
@@ -11,22 +11,22 @@ const mapValuesWithKey = mapValues.convert({ cap: false });
 interface Merge<Payload, Meta> {
   (args: {
     schema: normalizrSchema.Entity,
-    entityKey: string,
-    preProcess: (args: { originalData: any, meta: Meta, payload: Payload, data: any }) => any,
-    dataKey: string,
-    processValue: (args: {
+    entityKey?: string,
+    preProcess?: (args: { originalData: any, meta: Meta, payload: Payload, data: any }) => any,
+    dataKey?: string,
+    processValue?: (args: {
       originalData: any,
       meta: Meta,
       payload: Payload,
       value: any,
     }) => any,
-    postProcess: (args: {
+    postProcess?: (args: {
       originalData: any,
       meta: Meta,
       payload: Payload,
       data: any,
     }) => any,
-  }): ReducerMapValue<Payload, Meta>
+  }): ReducerMeta<any, Payload, Meta>
 }
 
 const merge: Merge<unknown, unknown> = ({

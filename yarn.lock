@@ -105,6 +105,11 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
+"@types/redux-actions@^2.6.1":
+  version "2.6.1"
+  resolved "https://registry.npm.taobao.org/@types/redux-actions/download/@types/redux-actions-2.6.1.tgz#0940e97fa35ad3004316bddb391d8e01d2efa605"
+  integrity sha1-CUDpf6Na0wBDFr3bOR2OAdLvpgU=
+
 "@types/serialize-javascript@^1.5.0":
   version "1.5.0"
   resolved "https://registry.npm.taobao.org/@types/serialize-javascript/download/@types/serialize-javascript-1.5.0.tgz#bdd334cfbb4fc0eca1fc608da37ad733c86381eb"

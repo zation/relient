@@ -2,11 +2,11 @@ import {
   prop, curry, flow, map, isNil, isObject, isEmpty,
 } from 'lodash/fp';
 
-export const getEntity: (keyPath: string) => (state: object) => object = curry(
+export const getEntity: (keyPath: string) => (state: object) => any = curry(
   (keyPath, state) => prop(`entities.${keyPath}`, state),
 );
 
-export const getEntityArray: (keyPath: string) => (state: object) => unknown[] = curry(
+export const getEntityArray: (keyPath: string) => (state: object) => any[] = curry(
   (
     keyPath,
     state,

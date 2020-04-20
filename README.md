@@ -26,7 +26,7 @@ Relient provides action, middleware, reducer utils to help you handle API reques
 
 ### Create action
 
-actions/account.js
+actions/account.ts
 
 ```js
 import { createAction, actionTypeCreator, post, read, put, del } from 'relient/actions';
@@ -59,7 +59,7 @@ export const remove = createAction(REMOVE, ({ id }) => del(`/account/${id}`));
 
 ### Create reducer
 
-reducers/account.js
+reducers/account.ts
 
 ```js
 import { merge, remove, handleActions, combineActions } from 'relient/reducers';

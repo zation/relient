@@ -1,6 +1,4 @@
-import {
-  createAction as originalCreateAction,
-} from 'redux-actions';
+import { createAction as originalCreateAction } from 'redux-actions';
 
 export const actionTypeCreator = (prefix: string) => (actionName: string): string => `~${prefix}#${actionName}`;
 

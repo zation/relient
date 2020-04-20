@@ -1,8 +1,8 @@
 import { omit, prop } from 'lodash/fp';
 import type { schema as normalizrSchema } from 'normalizr';
-import type { ReducerMapValue } from 'redux-actions';
+import type { ReducerMeta } from 'redux-actions';
 
-export default (schema: normalizrSchema.Entity): ReducerMapValue<unknown, unknown> => (
+export default (schema: normalizrSchema.Entity): ReducerMeta<unknown, unknown, unknown> => (
   originalData,
   { meta },
   // @ts-ignore
