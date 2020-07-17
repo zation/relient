@@ -27,9 +27,14 @@ export default (messages: {
     throw new Error('messageKey is required');
   }
 
+  const message = prop(messageKey)(messages);
+  if (!message) {
+    console.warn(`No message for key: ${messageKey}`);
+    return messageKey;
+  }
+
   try {
     return flow(
-      prop(messageKey),
       parse,
       mapWithIndex((element, index) => {
         const { value, type } = element;
@@ -44,7 +49,7 @@ export default (messages: {
         throw new Error(`Element type is not handled for: ${type}`);
       }),
       flow(getValues, every((value) => typeof value === 'string'))(values) ? join('') : identity,
-    )(messages);
+    )(message);
   } catch (e) {
     if (values) {
       throw new Error(`Error for messageKey: ${messageKey} and values: ${JSON.stringify(values)}`);
