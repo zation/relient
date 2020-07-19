@@ -48,7 +48,7 @@ export default (messages: {
         }
         throw new Error(`Element type is not handled for: ${type}`);
       }),
-      flow(getValues, every((value) => typeof value === 'string'))(values) ? join('') : identity,
+      flow(getValues, every((value) => typeof value === 'string' || typeof value === 'number'))(values) ? join('') : identity,
     )(message);
   } catch (e) {
     if (values) {
