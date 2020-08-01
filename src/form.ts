@@ -1,5 +1,6 @@
-import { isNil } from 'lodash/fp';
+import { isNil, isFinite } from 'lodash/fp';
 import type { FieldValidator } from 'final-form';
+import BigNumber from 'bignumber.js';
 
 export interface Validator {
   (message: string):
@@ -64,3 +65,16 @@ export const moreOrEqualThanValidator: Validator = (message) => (name) => (
 ) => (
   value !== '' && allValues && allValues[name] !== '' && Number(value) < Number(allValues[name]) ? message : undefined
 );
+
+export const formatPercentage = (number?: number): number | undefined => {
+  if (number && isFinite(Number(number))) {
+    return new BigNumber(number).multipliedBy(100).toNumber();
+  }
+  return number;
+};
+export const parsePercentage = (number?: number): number | undefined => {
+  if (number && isFinite(Number(number))) {
+    return new BigNumber(number).dividedBy(100).toNumber();
+  }
+  return number;
+};
