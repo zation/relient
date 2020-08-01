@@ -1,6 +1,4 @@
 import { prop, constant } from 'lodash/fp';
-// TODO: remove below when ts 3.8 is supported by typescript-eslint: https://github.com/typescript-eslint/typescript-eslint/issues/1436
-// eslint-disable-next-line import/no-unresolved
 import type { RequestInfo, RequestInit, Response } from 'node-fetch';
 
 import { throwServerError } from '../actions/server-error';

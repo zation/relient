@@ -1,5 +1,3 @@
-// TODO: remove below when ts 3.8 is supported by typescript-eslint: https://github.com/typescript-eslint/typescript-eslint/issues/1436
-// eslint-disable-next-line import/no-unresolved
 import type { History } from 'history';
 import {
   PUSH, REPLACE, GO, GO_FORWARD, GO_BACK,
