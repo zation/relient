@@ -2,6 +2,7 @@
 
 import { prop } from 'lodash/fp';
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 declare const __BROWSER__: boolean;
 
 export default (property: string): any => {
