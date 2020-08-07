@@ -13,6 +13,10 @@ const mapWithIndex = map.convert({ cap: false });
 
 export default (messages: {
   [key: string]: string
+}, config: {
+  ignoreNoMessageWarning
+} = {
+  ignoreNoMessageWarning: false,
 }) => (
   messageKey: string,
   values?: {
@@ -29,7 +33,9 @@ export default (messages: {
 
   const message = prop(messageKey)(messages);
   if (!message) {
-    console.warn(`No message for key: ${messageKey}`);
+    if (!config.ignoreNoMessageWarning) {
+      console.warn(`No message for key: ${messageKey}`);
+    }
     return messageKey;
   }
 
