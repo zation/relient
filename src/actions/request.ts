@@ -1,5 +1,11 @@
 import { stringify } from 'query-string';
-import { any, prop } from 'lodash/fp';
+import {
+  any,
+  prop,
+  isObject,
+  keys,
+  flow,
+} from 'lodash/fp';
 
 declare const global;
 const { File } = global;
@@ -15,7 +21,7 @@ const commonFetch = (
     'content-type': 'application/json',
     ...prop('headers')(options),
   };
-  if (File && any((item) => item instanceof File)(data)) {
+  if (File && isObject(data) && flow(keys, any((key) => data[key] instanceof File))(data)) {
     finalData = new FormData();
     if (data) {
       Object.keys(data).forEach((key) => {
