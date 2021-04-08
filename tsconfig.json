@@ -16,7 +16,11 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true
+    "strictNullChecks": true,
+    "declaration": true,
+    "outDir": "dist",
+    "rootDir": "src",
+    "inlineSourceMap": true
   },
   "include": [
     "src"

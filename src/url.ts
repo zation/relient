@@ -12,5 +12,5 @@ export const stripUrl = (url: string): string => url.replace(/\/\/+/g, '/');
 
 export const getWithBaseUrl = (
   url: string,
-  baseUrl: string,
-): string => stripUrl(`/${baseUrl}/${url}`);
+  baseUrl?: string,
+): string => (baseUrl ? stripUrl(`/${baseUrl}/${url}`) : url);
