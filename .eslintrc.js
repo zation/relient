@@ -24,8 +24,11 @@ module.exports = {
     __BROWSER__: true,
   },
 
+  ignorePatterns: ['.eslintrc.js'],
+
   rules: {
     'function-paren-newline': 'off',
     '@typescript-eslint/indent': 'off',
+    'max-len': ["error", { "code": 120 }],
   },
 };

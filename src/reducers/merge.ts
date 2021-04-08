@@ -1,50 +1,58 @@
 import {
   isArray, mapValues, prop, flow, identity,
 } from 'lodash/fp';
-import type { schema as normalizrSchema } from 'normalizr';
+import convert from 'lodash/fp/convert';
 import type { ReducerMeta } from 'redux-actions';
+import type { schema as schemaType } from 'normalizr';
 import normalize from './normalize';
 
-// @ts-ignore
-const mapValuesWithKey = mapValues.convert({ cap: false });
+const mapValuesWithKey = convert(mapValues, { cap: false });
 
-interface Merge<Payload, Meta> {
-  (args: {
-    schema: normalizrSchema.Entity,
-    entityKey?: string,
-    preProcess?: (args: { originalData: any, meta: Meta, payload: Payload, data: any }) => any,
-    dataKey?: string,
-    processValue?: (args: {
-      originalData: any,
-      meta: Meta,
-      payload: Payload,
-      value: any,
-    }) => any,
-    postProcess?: (args: {
-      originalData: any,
-      meta: Meta,
-      payload: Payload,
-      data: any,
-    }) => any,
-  }): ReducerMeta<any, Payload, Meta>
+type State<Item> = { [id: string]: Item };
+
+interface MergeParams<Item, Payload, Meta, Entity> {
+  schema: schemaType.Entity<Entity>
+  entityKey?: string
+  preProcess?: (args: {
+    originalData: State<Item>
+    meta: Meta
+    payload: Payload
+    data: State<Item>
+  }) => any
+  dataKey?: string
+  processValue?: (args: {
+    originalData: State<Item>
+    meta: Meta
+    payload: Payload
+    value: Item
+  }) => State<Item>
+  postProcess?: (args: {
+    originalData: State<Item>
+    meta: Meta
+    payload: Payload
+    data: State<Item>
+  }) => State<Item>
 }
 
-const merge: Merge<unknown, unknown> = ({
+export default <Item, Payload, Meta, Entity = any>({
   schema,
   entityKey,
   preProcess,
   dataKey,
   processValue,
   postProcess,
-}) => (originalData, { payload, meta }) => flow(
+}: MergeParams<Item, Payload, Meta, Entity>): ReducerMeta<{ [id: string]: Item }, Payload, Meta> => (
+  originalData,
+  { payload, meta },
+) => flow(
   dataKey ? prop(dataKey) : identity,
   preProcess ? (data) => preProcess({
     originalData, meta, payload, data,
   }) : identity,
-  (data) => normalize(isArray(data) ? [schema] : schema)(data),
+  (data) => normalize<Entity>(isArray(data) ? [schema] : schema)(data),
   prop(`entities.${entityKey || schema.key}`),
-  mapValuesWithKey((value, key) => ({
-    ...originalData[key],
+  mapValuesWithKey((value: Item, id: string) => ({
+    ...originalData[id],
     ...(processValue ? processValue({
       meta, originalData, payload, value,
     }) : value),
@@ -54,5 +62,3 @@ const merge: Merge<unknown, unknown> = ({
     data, originalData, meta, payload,
   }) : identity,
 )(payload);
-
-export default merge;

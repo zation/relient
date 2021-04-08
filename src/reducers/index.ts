@@ -2,6 +2,7 @@ import {
   handleActions as _handleActions,
   combineActions as _combineActions,
   Reducer,
+  ActionFunctions,
 } from 'redux-actions';
 import { combineReducers, ReducersMapObject } from 'redux';
 import { reduce, intersection } from 'lodash/fp';
@@ -17,17 +18,22 @@ import {
 import { THROW_SERVER_ERROR } from '../actions/server-error';
 
 export { schema } from 'normalizr';
+export { combineActions, handleActions } from 'redux-actions';
 export { default as merge } from './merge';
 export { default as normalize } from './normalize';
 export { default as replace } from './replace';
 export { default as remove } from './remove';
 
-export const handleActions = _handleActions;
-export const combineActions = _combineActions;
+declare module 'redux-actions' {
+  // https://github.com/redux-utilities/redux-actions/blob/v2.3.0/src/combineActions.js#L21
+  export function combineActions(
+    ...actionTypes: Array<ActionFunctions<any> | string | symbol>
+  ): string;
+}
 
 export const history = {
-  history: handleActions({
-    [combineActions(
+  history: _handleActions({
+    [_combineActions(
       PUSH,
       GO_BACK,
       GO_FORWARD,
@@ -39,7 +45,7 @@ export const history = {
 };
 
 export const serverError = {
-  serverError: handleActions({
+  serverError: _handleActions({
     [THROW_SERVER_ERROR]: (state, action) => ({
       ...state,
       [(new Date()).toISOString()]: action,
@@ -53,13 +59,13 @@ export interface EntityReducer<Payload = any, Meta = any> {
 
 export const createEntitiesReducer = (
   entityReducers: EntityReducer[],
-): ReducersMapObject => ({
+): ReducersMapObject<any, any> => ({
   entities: combineReducers({
     ...serverError,
     ...history,
     ...reduce((
       result,
-      item: object,
+      item: EntityReducer,
     ) => {
       const duplicatedKeys = intersection(Object.keys(item))(Object.keys(result));
       if (duplicatedKeys.length > 0) {

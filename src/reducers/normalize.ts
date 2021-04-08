@@ -1,3 +1,3 @@
-import { normalize as originalNormalize } from 'normalizr';
+import { normalize as originalNormalize, Schema } from 'normalizr';
 
-export default (schema) => (data) => originalNormalize(data, schema);
+export default <T = any>(schema: Schema<T>) => (data: any) => originalNormalize(data, schema);

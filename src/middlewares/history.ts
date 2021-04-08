@@ -1,9 +1,10 @@
 import type { History } from 'history';
+import type { Middleware } from 'redux';
 import {
   PUSH, REPLACE, GO, GO_FORWARD, GO_BACK,
 } from '../actions/history';
 
-export default (history: History) => () => (next) => (action) => {
+export default <State>(history: History): Middleware<{}, State> => () => (next) => (action) => {
   const { payload, type } = action;
 
   if (type === PUSH) {

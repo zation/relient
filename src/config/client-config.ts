@@ -8,5 +8,8 @@ export default (attributes: string[]): string => {
   if (!isArray(attributes) || attributes.length < 1) {
     throw new Error('Attributes should not be empty');
   }
-  return `window.__RELIENT_CONFIG__ = ${flow(map(config.get.bind(config)), zipObject(attributes), serialize)(attributes)}`;
+  return `window.__RELIENT_CONFIG__ = ${flow(
+    map(config.get.bind(config)),
+    zipObject(attributes), serialize,
+  )(attributes)}`;
 };

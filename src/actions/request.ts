@@ -7,25 +7,23 @@ import {
   flow,
 } from 'lodash/fp';
 
-declare const global;
 const { File } = global;
 
 const commonFetch = (
   method: string,
   url: string,
-  data?: object,
+  data?: { [key: string]: any },
   options?: object,
 ): object => {
-  let finalData;
+  let finalData: FormData | string = new FormData();
   let headers = {
     'content-type': 'application/json',
     ...prop('headers')(options),
   };
-  if (File && isObject(data) && flow(keys, any((key) => data[key] instanceof File))(data)) {
-    finalData = new FormData();
+  if (File && isObject(data) && flow(keys, any((key: string) => data[key] instanceof File))(data)) {
     if (data) {
       Object.keys(data).forEach((key) => {
-        finalData.append(key, data[key]);
+        (finalData as FormData).append(key, data[key]);
       });
     }
     headers = {};

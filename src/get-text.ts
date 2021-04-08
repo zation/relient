@@ -1,15 +1,10 @@
-import {
-  identity,
-  propertyOf,
-} from 'lodash/fp';
+import { identity } from 'lodash/fp';
 
 export default (textMap: {
   [text: string]: any
-  // @ts-ignore
-}) => (i18n = identity) => (key) => {
+}) => (i18n = identity) => (key: string) => {
   if (key) {
-    // @ts-ignore
-    const text = propertyOf(textMap)(key);
+    const text = textMap[key];
     if (text) {
       return i18n(text);
     }

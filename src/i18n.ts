@@ -1,28 +1,46 @@
-import { cloneElement, isValidElement, ReactElement } from 'react';
+import {
+  cloneElement,
+  isValidElement,
+  ReactElement,
+  useContext,
+  createContext,
+} from 'react';
 import {
   parse,
   isLiteralElement,
   isArgumentElement,
-} from 'intl-messageformat-parser';
+  MessageFormatElement,
+} from '@formatjs/icu-messageformat-parser';
 import {
   flow, map, prop, every, values as getValues, join, identity,
 } from 'lodash/fp';
+import convert from 'lodash/fp/convert';
 
-// @ts-ignore
-const mapWithIndex = map.convert({ cap: false });
+const mapWithIndex = convert(map, { cap: false });
+
+export interface I18N {
+  (
+    messageKey: string,
+    values?: {
+      [key: string]: ReactElement | string | number
+    },
+  ): string | undefined | (ReactElement | string | number)[]
+}
+
+export const I18NContext = createContext<I18N>(identity);
+
+export const useI18N = () => useContext<I18N>(I18NContext);
 
 export default (messages: {
   [key: string]: string
 }, config: {
-  ignoreNoMessageWarning
+  ignoreNoMessageWarning: boolean
 } = {
   ignoreNoMessageWarning: false,
-}) => (
-  messageKey: string,
-  values?: {
-    [key: string]: ReactElement | string | number
-  },
-): string | undefined | (ReactElement | string | number)[] => {
+}): I18N => (
+  messageKey,
+  values?,
+) => {
   if (!messages) {
     throw new Error('Messages is required');
   }
@@ -42,19 +60,23 @@ export default (messages: {
   try {
     return flow(
       parse,
-      mapWithIndex((element, index) => {
-        const { value, type } = element;
+      mapWithIndex((element: MessageFormatElement, index: number) => {
+        const { type } = element;
         if (isLiteralElement(element)) {
-          return value;
+          return element.value;
         }
         if (isArgumentElement(element)) {
-          const argumentValue = prop(value)(values);
+          const argumentValue = prop(element.value)(values);
           return isValidElement(argumentValue)
-            ? cloneElement(argumentValue, { key: `${value}${index}` }) : argumentValue;
+            ? cloneElement(argumentValue, { key: `${element.value}${index}` }) : argumentValue;
         }
         throw new Error(`Element type is not handled for: ${type}`);
       }),
-      flow(getValues, every((value) => typeof value === 'string' || typeof value === 'number'))(values) ? join('') : identity,
+      flow(
+        getValues,
+        every((value) => typeof value === 'string' || typeof value === 'number'),
+      )(
+        values) ? join('') : identity,
     )(message);
   } catch (e) {
     if (values) {

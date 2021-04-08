@@ -1,5 +1,6 @@
 import { prop, constant } from 'lodash/fp';
 import type { RequestInfo, RequestInit, Response } from 'node-fetch';
+import type { Middleware } from 'redux';
 
 import { throwServerError } from '../actions/server-error';
 
@@ -14,8 +15,8 @@ const deserialize = (response: Response): Promise<any> => {
   return response.text();
 };
 
-export default ({
-  fetch: a,
+export default <State>({
+  fetch,
   apiDomain: globalApiDomain,
   getDefaultHeader = constant({}),
 }: {
@@ -24,8 +25,8 @@ export default ({
     init?: RequestInit,
   ) => Promise<Response>,
   apiDomain: string,
-  getDefaultHeader: (object) => object
-}) => ({
+  getDefaultHeader: (params: { getState: () => State, withoutAuth: boolean }) => object
+}): Middleware<{}, State> => ({
   getState,
   dispatch,
 }) => (next) => async (action) => {
@@ -35,7 +36,7 @@ export default ({
       url, isApi, withoutAuth, apiDomain, ...options
     } = payload;
     if (isApi) {
-      const response = await a(`${apiDomain || globalApiDomain}${url}`, {
+      const response = await fetch(`${apiDomain || globalApiDomain}${url}`, {
         ...options,
         credentials: 'same-origin',
         headers: {

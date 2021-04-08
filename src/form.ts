@@ -1,80 +1,45 @@
-import { isNil, isFinite } from 'lodash/fp';
-import type { FieldValidator } from 'final-form';
+/* eslint-disable no-template-curly-in-string */
+/* eslint-disable @typescript-eslint/no-throw-literal */
+import { isFinite } from 'lodash/fp';
+import { ChangeEvent } from 'react';
 import BigNumber from 'bignumber.js';
+import type { FormInstance } from 'antd/es/form';
+import type { Rule, NamePath } from 'rc-field-form/es/interface';
+import type { I18N } from './i18n';
 
-export interface Validator {
-  (message: string):
-    FieldValidator<string> |
-    ((number: number) => FieldValidator<string>) |
-    ((name: string) => FieldValidator<string>)
-}
+export const createSameAsRule = (
+  messageKey: string,
+  i18n: I18N,
+) => (targetNamePath: NamePath, targetLabel = '') => ({ getFieldValue }: FormInstance) => ({
+  async validator(rule: Rule, value: any) {
+    if (value && getFieldValue(targetNamePath) !== value) {
+      throw { errors: [{ message: i18n(messageKey, { targetLabel, value }) }] };
+    }
+  },
+});
 
-export const composeValidators = (
-  ...validators: FieldValidator<string>[]
-): FieldValidator<string> => (
-  value, allValues, meta,
-) => validators.reduce((
-  error,
-  validator,
-) => error || validator(value, allValues, meta), undefined);
+export const createPositiveNumberRule = (
+  messageKey: string,
+  i18n: I18N,
+) => () => ({
+  async validator(rule: Rule, value: any) {
+    if (value !== '' && Number(value) <= 0) {
+      throw { errors: [{ message: i18n(messageKey, { value }) }] };
+    }
+  },
+});
 
-export const requiredValidator: Validator = (message) => (value) => {
-  if (isNil(value) || value === '') {
-    return message;
-  }
-  return undefined;
-};
-
-export const sameAsValidator: Validator = (message) => (name) => (
-  value,
-  allValues,
-) => (
-  (allValues && value !== allValues[name]) ? message : undefined
-);
-
-export const minLengthValidator: Validator = (message) => (length) => (value) => (
-  value && value.length < length ? message : undefined
-);
-
-export const maxLengthValidator: Validator = (message) => (length) => (value) => (
-  value && value.length > length ? message : undefined
-);
-
-export const positiveNumberValidator: Validator = (message) => (value) => (
-  value !== '' && Number(value) <= 0 ? message : undefined
-);
-
-export const lessOrEqualValidator: Validator = (message) => (number) => (value) => (
-  value !== '' && Number(value) > number ? message : undefined
-);
-
-export const moreOrEqualValidator: Validator = (message) => (number) => (value) => (
-  value !== '' && Number(value) < number ? message : undefined
-);
-
-export const lessOrEqualThanValidator: Validator = (message) => (name) => (
-  value,
-  allValues,
-) => (
-  value !== '' && allValues && allValues[name] !== '' && Number(value) > Number(allValues[name]) ? message : undefined
-);
-
-export const moreOrEqualThanValidator: Validator = (message) => (name) => (
-  value,
-  allValues,
-) => (
-  value !== '' && allValues && allValues[name] !== '' && Number(value) < Number(allValues[name]) ? message : undefined
-);
-
-export const formatPercentage = (number?: number): number | undefined => {
+export const normalizePercentage = (number: any) => {
   if (number && isFinite(Number(number))) {
     return new BigNumber(number).multipliedBy(100).toNumber();
   }
   return number;
 };
-export const parsePercentage = (number?: number): number | undefined => {
-  if (number && isFinite(Number(number))) {
-    return new BigNumber(number).dividedBy(100).toNumber();
+export const getPercentageFromEvent = ({
+  target: { value },
+}: ChangeEvent<HTMLInputElement>) => {
+  if (value && isFinite(Number(value))) {
+    return new BigNumber(value).dividedBy(100).toNumber();
   }
-  return number;
+  return value;
 };
