@@ -21,8 +21,5 @@
     "outDir": "dist",
     "rootDir": "src",
     "inlineSourceMap": true
-  },
-  "include": [
-    "src"
-  ]
+  }
 }

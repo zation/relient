@@ -1,7 +1,7 @@
 import { identity } from 'lodash/fp';
 
 export default (textMap: {
-  [text: string]: any
+  [key: string]: any
 }) => (i18n = identity) => (key: string) => {
   if (key) {
     const text = textMap[key];
