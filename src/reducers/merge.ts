@@ -1,12 +1,12 @@
 import {
   isArray, mapValues, prop, flow, identity,
 } from 'lodash/fp';
-import convert from 'lodash/fp/convert';
 import type { ReducerMeta } from 'redux-actions';
 import type { schema as schemaType } from 'normalizr';
 import normalize from './normalize';
 
-const mapValuesWithKey = convert(mapValues, { cap: false });
+// @ts-ignore
+const mapValuesWithKey = mapValues.convert({ cap: false });
 
 type State<Item> = { [id: string]: Item };
 

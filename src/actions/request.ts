@@ -15,20 +15,19 @@ const commonFetch = (
   data?: { [key: string]: any },
   options?: object,
 ): object => {
-  let finalData: FormData | string = new FormData();
+  let body: FormData | string | undefined;
   let headers = {
     'content-type': 'application/json',
     ...prop('headers')(options),
   };
   if (File && isObject(data) && flow(keys, any((key: string) => data[key] instanceof File))(data)) {
-    if (data) {
-      Object.keys(data).forEach((key) => {
-        (finalData as FormData).append(key, data[key]);
-      });
-    }
+    body = new FormData();
+    Object.keys(data).forEach((key) => {
+      (body as FormData).append(key, data[key]);
+    });
     headers = {};
   } else if (data) {
-    finalData = JSON.stringify(data);
+    body = JSON.stringify(data);
   }
 
   return {
@@ -37,7 +36,7 @@ const commonFetch = (
     isApi: true,
     method,
     headers,
-    body: finalData,
+    body,
   };
 };
 

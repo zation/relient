@@ -1,7 +1,7 @@
 import { identity, map } from 'lodash/fp';
-import convert from 'lodash/fp/convert';
 
-const mapWithKeys = convert(map, { cap: false });
+// @ts-ignore
+const mapWithKeys = map.convert({ cap: false });
 
 export default (textMap: {
   [text: string]: any

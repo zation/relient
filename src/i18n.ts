@@ -14,9 +14,9 @@ import {
 import {
   flow, map, prop, every, values as getValues, join, identity,
 } from 'lodash/fp';
-import convert from 'lodash/fp/convert';
 
-const mapWithIndex = convert(map, { cap: false });
+// @ts-ignore
+const mapWithIndex = map.convert({ cap: false });
 
 export interface I18N {
   (

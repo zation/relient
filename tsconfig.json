@@ -20,7 +20,6 @@
     "declaration": true,
     "outDir": "dist",
     "rootDir": "src",
-    "inlineSourceMap": true,
-    "jsx": "react"
+    "inlineSourceMap": true
   }
 }
