@@ -1,6 +1,6 @@
 {
   "name": "relient",
-  "version": "5.0.7",
+  "version": "5.0.8",
   "author": "Liu Yang <zation1@gmail.com>",
   "license": "MIT",
   "keywords": [
@@ -10,7 +10,7 @@
   ],
   "description": "Relient is an util set working closely with Relient-Cli. It will be useful if your project is built on React, Redux and of course Relient-Cli",
   "engines": {
-    "node": ">=10.0",
+    "node": ">=12.0",
     "npm": ">=5.0"
   },
   "repository": {
@@ -62,6 +62,7 @@
     "fix": "npm run lint --fix",
     "build": "rm -rf ./dist && mkdir ./dist && cp ./package.json ./README.md ./dist/ && tsc && babel --config-file ./.babelrc.js ./dist --out-dir ./dist",
     "pub": "npm run lint && npm run build && npm publish ./dist --registry=https://registry.npmjs.org/",
+    "postinstall": "husky install",
     "prepublishOnly": "pinst --disable",
     "postpublish": "pinst --enable"
   }

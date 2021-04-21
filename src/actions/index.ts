@@ -2,6 +2,8 @@ import { identity } from 'lodash/fp';
 
 export const actionTypeCreator = (prefix: string) => (actionName: string): string => `~${prefix}#${actionName}`;
 
+export const createSimpleAction = (type: string) => () => ({ type });
+
 export function createAction<ParamsAndPayloadAndMeta>(
   type: string
 ): (params: ParamsAndPayloadAndMeta) => {
@@ -34,7 +36,7 @@ export function createAction<Params, Payload, Meta>(
   payloadCreator: (params: Params) => Payload = identity,
   metaCreator: (params: Params) => Meta = identity,
 ) {
-  return (params: any) => ({
+  return (params: Params) => ({
     type,
     payload: payloadCreator(params),
     meta: metaCreator(params),
