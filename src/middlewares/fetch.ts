@@ -1,5 +1,4 @@
 import { prop, constant } from 'lodash/fp';
-import type { RequestInfo, RequestInit, Response } from 'node-fetch';
 import type { Middleware } from 'redux';
 
 import { throwServerError } from '../actions/server-error';
@@ -15,33 +14,32 @@ const deserialize = (response: Response): Promise<any> => {
   return response.text();
 };
 
-export default <State>({
+export interface FetchMiddlewareParams<State> {
+  fetch: typeof fetch,
+  apiDomain: string,
+  getDefaultHeader: (params: { getState: () => State, withoutAuth: boolean }) => Record<string, string>
+}
+
+export default <State = any>({
   fetch,
   apiDomain: globalApiDomain,
   getDefaultHeader = constant({}),
-}: {
-  fetch: (
-    url: RequestInfo,
-    init?: RequestInit,
-  ) => Promise<Response>,
-  apiDomain: string,
-  getDefaultHeader: (params: { getState: () => State, withoutAuth: boolean }) => object
-}): Middleware<{}, State> => ({
+}: FetchMiddlewareParams<State>): Middleware<{}, State> => ({
   getState,
   dispatch,
 }) => (next) => async (action) => {
   const { payload, meta } = action;
   if (payload) {
     const {
-      url, isApi, withoutAuth, apiDomain, ...options
+      url, isApi, withoutAuth, apiDomain, headers, ...others
     } = payload;
     if (isApi) {
       const response = await fetch(`${apiDomain || globalApiDomain}${url}`, {
-        ...options,
+        ...others,
         credentials: 'same-origin',
         headers: {
           ...getDefaultHeader({ getState, withoutAuth }),
-          ...options.headers,
+          ...headers,
         },
       });
       const data = await deserialize(response);

@@ -3,7 +3,7 @@ import { Dispatch } from 'redux';
 import { THROW_SERVER_ERROR } from '../actions/server-error';
 
 interface Callback <S, D extends Dispatch = Dispatch>{
-  ({ payload, getState, dispatch }: { payload: object, getState(): S, dispatch: D }): void
+  ({ payload, getState, dispatch }: { payload: any, getState(): S, dispatch: D }): void
 }
 
 export default <State, D extends Dispatch = Dispatch>({

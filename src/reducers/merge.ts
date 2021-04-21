@@ -8,7 +8,7 @@ import normalize from './normalize';
 // @ts-ignore
 const mapValuesWithKey = mapValues.convert({ cap: false });
 
-type State<Item> = { [id: string]: Item };
+type State<Item> = Record<number | string, Item>;
 
 interface MergeParams<Item, Payload, Meta, Entity> {
   schema: schemaType.Entity<Entity>
@@ -41,7 +41,7 @@ export default <Item, Payload, Meta, Entity = any>({
   dataKey,
   processValue,
   postProcess,
-}: MergeParams<Item, Payload, Meta, Entity>): ReducerMeta<{ [id: string]: Item }, Payload, Meta> => (
+}: MergeParams<Item, Payload, Meta, Entity>): ReducerMeta<State<Item>, Payload, Meta> => (
   originalData,
   { payload, meta },
 ) => flow(
@@ -51,7 +51,7 @@ export default <Item, Payload, Meta, Entity = any>({
   }) : identity,
   (data) => normalize<Entity>(isArray(data) ? [schema] : schema)(data),
   prop(`entities.${entityKey || schema.key}`),
-  mapValuesWithKey((value: Item, id: string) => ({
+  mapValuesWithKey((value: Item, id: number | string) => ({
     ...originalData[id],
     ...(processValue ? processValue({
       meta, originalData, payload, value,

@@ -4,7 +4,7 @@ import type { ReducerMapValue } from 'redux-actions';
 import normalize from './normalize';
 
 export default <Item, Payload>
-(schema: schemaType.Entity): ReducerMapValue<{ [id: string]: Item }, Payload> => (
+(schema: schemaType.Entity): ReducerMapValue<Record<number | string, Item>, Payload> => (
   originalData, { payload },
 ) => flow(
   normalize(isArray(payload) ? [schema] : schema),

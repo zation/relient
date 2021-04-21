@@ -4,8 +4,15 @@ import {
   Reducer,
   ActionFunctions,
 } from 'redux-actions';
-import { combineReducers, ReducersMapObject } from 'redux';
-import { reduce, intersection } from 'lodash/fp';
+import {
+  combineReducers,
+  ReducersMapObject,
+} from 'redux';
+import {
+  reduce,
+  intersection,
+} from 'lodash/fp';
+import type { Location } from 'history';
 import {
   GO,
   GO_BACK,
@@ -14,11 +21,14 @@ import {
   PUSH,
   REPLACE,
 } from '../actions/history';
-
 import { THROW_SERVER_ERROR } from '../actions/server-error';
+import { SET_FEATURE } from '../actions/feature';
 
 export { schema } from 'normalizr';
-export { combineActions, handleActions } from 'redux-actions';
+export {
+  combineActions,
+  handleActions,
+} from 'redux-actions';
 export { default as merge } from './merge';
 export { default as normalize } from './normalize';
 export { default as replace } from './replace';
@@ -31,8 +41,15 @@ declare module 'redux-actions' {
   ): string;
 }
 
+export const feature = {
+  feature: _handleActions<string | null>({
+    [SET_FEATURE]: (_, { payload }) => payload,
+
+  }, null),
+};
+
 export const history = {
-  history: _handleActions({
+  history: _handleActions<Location | null>({
     [_combineActions(
       PUSH,
       GO_BACK,
@@ -41,11 +58,11 @@ export const history = {
       GO,
       INIT,
     )]: (_, { payload }) => payload,
-  }, {}),
+  }, null),
 };
 
 export const serverError = {
-  serverError: _handleActions({
+  serverError: _handleActions<Record<string, any>>({
     [THROW_SERVER_ERROR]: (state, action) => ({
       ...state,
       [(new Date()).toISOString()]: action,
@@ -60,9 +77,10 @@ export interface EntityReducer<Payload = any, Meta = any> {
 export const createEntitiesReducer = (
   entityReducers: EntityReducer[],
 ): ReducersMapObject<any, any> => ({
+  ...serverError,
+  ...history,
+  ...feature,
   entities: combineReducers({
-    ...serverError,
-    ...history,
     ...reduce((
       result,
       item: EntityReducer,
