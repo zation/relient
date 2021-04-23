@@ -6,6 +6,7 @@ import {
   keys,
   flow,
 } from 'lodash/fp';
+import { APIActionPayload } from './interface';
 
 const { File } = global;
 
@@ -16,7 +17,7 @@ const commonFetch = (
   url: string,
   data?: Data,
   options?: RequestInit,
-): object => {
+): APIActionPayload => {
   let body: FormData | string | undefined;
   let headers = {
     'content-type': 'application/json',
