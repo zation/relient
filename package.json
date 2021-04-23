@@ -1,6 +1,6 @@
 {
   "name": "relient",
-  "version": "5.1.1",
+  "version": "5.1.2",
   "author": "Liu Yang <zation1@gmail.com>",
   "license": "MIT",
   "keywords": [
@@ -33,7 +33,7 @@
     "normalizr": ">=3.6.0",
     "query-string": ">=7.0.0",
     "react": ">=17.0.2",
-    "react-redux": "^7.2.3",
+    "react-redux": ">=7.2.2",
     "redux": ">=4.0.5",
     "redux-actions": ">=2.6.5",
     "serialize-javascript": ">=5.0.1",
