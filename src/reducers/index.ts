@@ -74,7 +74,7 @@ export interface EntityReducer<Payload = any, Meta = any> {
   [entityKey: string]: Reducer<Payload, Meta>
 }
 
-export const createEntitiesReducer = (
+export const createReducer = (
   entityReducers: EntityReducer[],
 ): ReducersMapObject<any, any> => ({
   ...serverError,
