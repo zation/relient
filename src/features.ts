@@ -5,13 +5,13 @@ import {
   prop,
   join,
 } from 'lodash/fp';
-import { Component } from 'react';
+import { ElementType } from 'react';
 
 export interface Feature {
   key: string
   link: string
   text: string
-  icon?: Component
+  icon?: ElementType
   items?: [Feature]
 }
 
