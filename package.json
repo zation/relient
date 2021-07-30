@@ -20,7 +20,6 @@
   "dependencies": {
     "@formatjs/icu-messageformat-parser": ">=1.1.4",
     "@types/config": "^0.0.38",
-    "@types/history": "^4.7.7",
     "@types/lodash": "^4.14.159",
     "@types/node": "^14.14.41",
     "@types/react": "^17.0.3",
@@ -50,6 +49,7 @@
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-config-airbnb-typescript": "^12.3.1",
     "eslint-plugin-import": "^2.22.0",
+    "history": "^5.0.0",
     "husky": "^6.0.0",
     "lint-staged": "^10.5.4",
     "pinst": "^2.1.6",

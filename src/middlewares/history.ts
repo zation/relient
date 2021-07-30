@@ -25,11 +25,11 @@ export default (history: History): Middleware => () => (next) => (action) => {
     return next({ ...action, payload: history.location });
   }
   if (type === GO_FORWARD) {
-    history.goForward();
+    history.forward();
     return next({ ...action, payload: history.location });
   }
   if (type === GO_BACK) {
-    history.goBack();
+    history.back();
     return next({ ...action, payload: history.location });
   }
   return next(action);

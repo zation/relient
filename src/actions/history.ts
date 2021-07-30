@@ -1,4 +1,4 @@
-import type { History } from 'history';
+import type { History, To } from 'history';
 import {
   createAction,
   actionTypeCreator,
@@ -15,8 +15,8 @@ export const GO_BACK = actionType('GO_BACK');
 export const GO_FORWARD = actionType('GO_FORWARD');
 
 export const init = createAction<History>(INIT);
-export const push = createAction<string>(PUSH);
-export const replace = createAction<string>(REPLACE);
+export const push = createAction<To>(PUSH);
+export const replace = createAction<To>(REPLACE);
 export const go = createAction<number>(GO);
 export const goBack = createSimpleAction(GO_BACK);
 export const goForward = createSimpleAction(GO_FORWARD);
