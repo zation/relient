@@ -10,6 +10,7 @@ export default (attributes: string[]): string => {
   }
   return `window.__RELIENT_CONFIG__ = ${flow(
     map(config.get.bind(config)),
-    zipObject(attributes), serialize,
+    zipObject(attributes),
+    serialize,
   )(attributes)}`;
 };
